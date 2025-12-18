@@ -9,7 +9,6 @@ import (
 	"github.com/pkg/errors"
 )
 
-//go:embed templates/search/*.tmpl
 //go:embed templates/search/v710/*.tmpl
 var searchFS embed.FS
 
@@ -113,37 +112,6 @@ func (sb *Builder) AddNlpSubdivisionSearch(nlpCriteria *NlpCriteria, subdivision
 	sb.nlpCriteria.SubdivisionWords = subdivisionWords
 
 	return sb.nlpCriteria
-}
-
-// SetupSearch loads templates for use by the search handler and should be done only once
-func SetupSearch() (*template.Template, error) {
-	// Load the templates once, the main entry point for the templates is search.tmpl. The search.tmpl takes
-	// the SearchRequest struct and uses the Request to build up the multi-query queries that is used to query elastic.
-
-	templates, err := template.ParseFS(searchFS,
-		"templates/search/search.tmpl",
-		"templates/search/contentQuery.tmpl",
-		"templates/search/matchAll.tmpl",
-		"templates/search/contentHeader.tmpl",
-		"templates/search/countHeader.tmpl",
-		"templates/search/countQuery.tmpl",
-		"templates/search/coreQuery.tmpl",
-		"templates/search/weightedQuery.tmpl",
-		"templates/search/nlpCategory.tmpl",
-		"templates/search/nlpLocation.tmpl",
-		"templates/search/contentFilters.tmpl",
-		"templates/search/contentFilterOnURIPrefix.tmpl",
-		"templates/search/contentFilterOnTopic.tmpl",
-		"templates/search/contentFilterOnTopicWildcard.tmpl",
-		"templates/search/sortByTitle.tmpl",
-		"templates/search/sortByRelevance.tmpl",
-		"templates/search/sortByReleaseDate.tmpl",
-		"templates/search/sortByReleaseDateAsc.tmpl",
-		"templates/search/sortByReleaseDateAsc.tmpl",
-		"templates/search/sortByFirstLetter.tmpl",
-	)
-
-	return templates, err
 }
 
 // SetupV710Search loads v710 templates for use by the search handler and should be done only once

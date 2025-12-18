@@ -34,7 +34,7 @@ func main() {
 		responseData []byte
 		err          error
 		ctx          = context.Background()
-		esClient, _  = dpEs.NewClient(dpEsClient.Config{ClientLib: dpEsClient.GoElasticV710, Address: "http://localhost:9200", Transport: dphttp.DefaultTransport})
+		esClient, _  = dpEs.NewClient(dpEsClient.Config{ClientLib: dpEsClient.GoElasticV710, Address: "http://localhost:11200", Transport: dphttp.DefaultTransport})
 	)
 
 	flag.Var(&sr, "sr", "a searchRequest object in json format")

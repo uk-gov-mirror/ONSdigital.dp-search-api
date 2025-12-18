@@ -66,7 +66,7 @@ lint-local: ## Use locally to run linters against Go code
 	
 .PHONY: local
 local: ## Exports various configurations and then runs the application locally
-	export ELASTIC_SEARCH_URL=https://localhost:9200; \
+	export ELASTIC_SEARCH_URL=https://localhost:11200; \
 	export AWS_TLS_INSECURE_SKIP_VERIFY=true; \
 	export AWS_PROFILE=development; \
 	export AWS_FILENAME=$(HOME)/.aws/credentials; \

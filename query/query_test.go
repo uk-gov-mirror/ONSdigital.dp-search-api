@@ -6,9 +6,9 @@ import (
 	c "github.com/smartystreets/goconvey/convey"
 )
 
-func TestSetupSearch(t *testing.T) {
+func TestSetupV710Search(t *testing.T) {
 	c.Convey("Should return templates and error should be nil", t, func() {
-		searchTemplates, err := SetupSearch()
+		searchTemplates, err := SetupV710Search()
 
 		c.So(err, c.ShouldBeNil)
 		c.So(searchTemplates, c.ShouldNotBeNil)
