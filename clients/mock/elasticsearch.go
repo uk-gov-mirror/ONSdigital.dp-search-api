@@ -5,10 +5,9 @@ package mock
 
 import (
 	"context"
-	dpEsClient "github.com/ONSdigital/dp-elasticsearch/v3/client"
+	dpEsClient "github.com/ONSdigital/dp-elasticsearch/v4/client"
 	"github.com/ONSdigital/dp-healthcheck/healthcheck"
 	"github.com/ONSdigital/dp-search-api/clients"
-	"github.com/elastic/go-elasticsearch/v7/esutil"
 	"sync"
 )
 
@@ -25,7 +24,7 @@ var _ clients.ElasticSearch = &ElasticSearchMock{}
 //			AddDocumentFunc: func(ctx context.Context, indexName string, documentID string, document []byte, opts *dpEsClient.AddDocumentOptions) error {
 //				panic("mock out the AddDocument method")
 //			},
-//			BulkIndexAddFunc: func(ctx context.Context, action dpEsClient.BulkIndexerAction, index string, documentID string, document []byte, onSuccess func(ctx context.Context, item esutil.BulkIndexerItem, res esutil.BulkIndexerResponseItem), onFailure func(ctx context.Context, item esutil.BulkIndexerItem, res esutil.BulkIndexerResponseItem, err error)) error {
+//			BulkIndexAddFunc: func(ctx context.Context, action dpEsClient.BulkIndexerAction, index string, documentID string, document []byte, onSuccess dpEsClient.SuccessFunc, onFailure dpEsClient.FailureFunc) error {
 //				panic("mock out the BulkIndexAdd method")
 //			},
 //			BulkIndexCloseFunc: func(contextMoqParam context.Context) error {
@@ -90,7 +89,7 @@ type ElasticSearchMock struct {
 	AddDocumentFunc func(ctx context.Context, indexName string, documentID string, document []byte, opts *dpEsClient.AddDocumentOptions) error
 
 	// BulkIndexAddFunc mocks the BulkIndexAdd method.
-	BulkIndexAddFunc func(ctx context.Context, action dpEsClient.BulkIndexerAction, index string, documentID string, document []byte, onSuccess func(ctx context.Context, item esutil.BulkIndexerItem, res esutil.BulkIndexerResponseItem), onFailure func(ctx context.Context, item esutil.BulkIndexerItem, res esutil.BulkIndexerResponseItem, err error)) error
+	BulkIndexAddFunc func(ctx context.Context, action dpEsClient.BulkIndexerAction, index string, documentID string, document []byte, onSuccess dpEsClient.SuccessFunc, onFailure dpEsClient.FailureFunc) error
 
 	// BulkIndexCloseFunc mocks the BulkIndexClose method.
 	BulkIndexCloseFunc func(contextMoqParam context.Context) error
@@ -171,9 +170,9 @@ type ElasticSearchMock struct {
 			// Document is the document argument value.
 			Document []byte
 			// OnSuccess is the onSuccess argument value.
-			OnSuccess func(ctx context.Context, item esutil.BulkIndexerItem, res esutil.BulkIndexerResponseItem)
+			OnSuccess dpEsClient.SuccessFunc
 			// OnFailure is the onFailure argument value.
-			OnFailure func(ctx context.Context, item esutil.BulkIndexerItem, res esutil.BulkIndexerResponseItem, err error)
+			OnFailure dpEsClient.FailureFunc
 		}
 		// BulkIndexClose holds details about calls to the BulkIndexClose method.
 		BulkIndexClose []struct {
@@ -375,7 +374,7 @@ func (mock *ElasticSearchMock) AddDocumentCalls() []struct {
 }
 
 // BulkIndexAdd calls BulkIndexAddFunc.
-func (mock *ElasticSearchMock) BulkIndexAdd(ctx context.Context, action dpEsClient.BulkIndexerAction, index string, documentID string, document []byte, onSuccess func(ctx context.Context, item esutil.BulkIndexerItem, res esutil.BulkIndexerResponseItem), onFailure func(ctx context.Context, item esutil.BulkIndexerItem, res esutil.BulkIndexerResponseItem, err error)) error {
+func (mock *ElasticSearchMock) BulkIndexAdd(ctx context.Context, action dpEsClient.BulkIndexerAction, index string, documentID string, document []byte, onSuccess dpEsClient.SuccessFunc, onFailure dpEsClient.FailureFunc) error {
 	if mock.BulkIndexAddFunc == nil {
 		panic("ElasticSearchMock.BulkIndexAddFunc: method is nil but ElasticSearch.BulkIndexAdd was just called")
 	}
@@ -385,8 +384,8 @@ func (mock *ElasticSearchMock) BulkIndexAdd(ctx context.Context, action dpEsClie
 		Index      string
 		DocumentID string
 		Document   []byte
-		OnSuccess  func(ctx context.Context, item esutil.BulkIndexerItem, res esutil.BulkIndexerResponseItem)
-		OnFailure  func(ctx context.Context, item esutil.BulkIndexerItem, res esutil.BulkIndexerResponseItem, err error)
+		OnSuccess  dpEsClient.SuccessFunc
+		OnFailure  dpEsClient.FailureFunc
 	}{
 		Ctx:        ctx,
 		Action:     action,
@@ -412,8 +411,8 @@ func (mock *ElasticSearchMock) BulkIndexAddCalls() []struct {
 	Index      string
 	DocumentID string
 	Document   []byte
-	OnSuccess  func(ctx context.Context, item esutil.BulkIndexerItem, res esutil.BulkIndexerResponseItem)
-	OnFailure  func(ctx context.Context, item esutil.BulkIndexerItem, res esutil.BulkIndexerResponseItem, err error)
+	OnSuccess  dpEsClient.SuccessFunc
+	OnFailure  dpEsClient.FailureFunc
 } {
 	var calls []struct {
 		Ctx        context.Context
@@ -421,8 +420,8 @@ func (mock *ElasticSearchMock) BulkIndexAddCalls() []struct {
 		Index      string
 		DocumentID string
 		Document   []byte
-		OnSuccess  func(ctx context.Context, item esutil.BulkIndexerItem, res esutil.BulkIndexerResponseItem)
-		OnFailure  func(ctx context.Context, item esutil.BulkIndexerItem, res esutil.BulkIndexerResponseItem, err error)
+		OnSuccess  dpEsClient.SuccessFunc
+		OnFailure  dpEsClient.FailureFunc
 	}
 	mock.lockBulkIndexAdd.RLock()
 	calls = mock.calls.BulkIndexAdd

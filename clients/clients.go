@@ -5,7 +5,7 @@ import (
 
 	datasetclient "github.com/ONSdigital/dp-api-clients-go/v2/dataset"
 	"github.com/ONSdigital/dp-api-clients-go/v2/zebedee"
-	dpEsClient "github.com/ONSdigital/dp-elasticsearch/v3/client"
+	dpEsClient "github.com/ONSdigital/dp-elasticsearch/v4/client"
 )
 
 //go:generate moq -out mock/datasetapi.go    -pkg mock . DatasetAPIClient

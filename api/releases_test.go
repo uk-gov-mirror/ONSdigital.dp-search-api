@@ -7,7 +7,7 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/ONSdigital/dp-elasticsearch/v3/client"
+	"github.com/ONSdigital/dp-elasticsearch/v4/client"
 	"github.com/ONSdigital/dp-search-api/query"
 	"github.com/smartystreets/goconvey/convey"
 )

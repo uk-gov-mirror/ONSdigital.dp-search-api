@@ -5,8 +5,8 @@ import (
 
 	"github.com/ONSdigital/dp-api-clients-go/v2/nlp/berlin"
 	"github.com/ONSdigital/dp-api-clients-go/v2/nlp/category"
-	dpEs "github.com/ONSdigital/dp-elasticsearch/v3"
-	dpEsClient "github.com/ONSdigital/dp-elasticsearch/v3/client"
+	dpEs "github.com/ONSdigital/dp-elasticsearch/v4"
+	dpEsClient "github.com/ONSdigital/dp-elasticsearch/v4/client"
 	"github.com/ONSdigital/dp-net/v3/awsauth"
 	dphttp "github.com/ONSdigital/dp-net/v3/http"
 	"github.com/ONSdigital/dp-search-api/api"

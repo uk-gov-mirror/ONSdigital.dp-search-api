@@ -10,7 +10,7 @@ import (
 	"text/template"
 	"time"
 
-	"github.com/ONSdigital/dp-elasticsearch/v3/client"
+	"github.com/ONSdigital/dp-elasticsearch/v4/client"
 	c "github.com/smartystreets/goconvey/convey"
 )
 

@@ -4,8 +4,8 @@ github.com/ONSdigital/dp-authorisation v0.5.0 h1:k1ROJ+vgd1hDWyjj+ZdvSZGlZw73PN1
 github.com/ONSdigital/dp-authorisation v0.5.0/go.mod h1:Ep30ANa8vAWO7A5H/VsxoiJZkeCCXndnqa+tVoJuvUY=
 github.com/ONSdigital/dp-component-test v0.20.0 h1:6a1pr5A1MW/oQjvZQZNPxoQFVk7JPsKh3mA61f4VHH0=
 github.com/ONSdigital/dp-component-test v0.20.0/go.mod h1:9hcGbl+8zILaF5TBLJqgEsLEmw5wT0O0Ty+d933r4SM=
-github.com/ONSdigital/dp-elasticsearch/v3 v3.0.4 h1:oVIHABqkeCoiqCYU+DTvbFPxS7OsQJz6AGjgoMW9Gqk=
-github.com/ONSdigital/dp-elasticsearch/v3 v3.0.4/go.mod h1://nUUkUDDOoMzfHPrgGOKaTHsj5oWIdMDmbdE70yeec=
+github.com/ONSdigital/dp-elasticsearch/v4 v4.0.1 h1:ZBk5o8H4MNTwNFz1FYGcrAE9Z+tJcmz+pMeuDiF1ku0=
+github.com/ONSdigital/dp-elasticsearch/v4 v4.0.1/go.mod h1:J4xUBHVwncjkD8hy1e/zJQBg1UfZCGq3tI3KC91RBXc=
 github.com/ONSdigital/dp-healthcheck v1.6.4 h1:FhWOuVmob36dYq7AzCdbgyf0Vk58IFitSl8y8pWJ8ck=
 github.com/ONSdigital/dp-healthcheck v1.6.4/go.mod h1:j3UNbGT4ZJg1chrRkPLE6YUVYCg1su3AAQ8frcBrvgc=
 github.com/ONSdigital/dp-mocking v0.11.0 h1:laln6e2JD4vtsYbg0cTw9ur1Xf390AUYdd85cG2UNQw=
@@ -245,8 +245,8 @@ golang.org/x/sys v0.0.0-20210615035016-665e8c7367d1/go.mod h1:oPkhp1MJrh7nUepCBc
 golang.org/x/sys v0.0.0-20220520151302-bc2c85ada10a/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
 golang.org/x/sys v0.0.0-20220722155257-8c9f86f7a55f/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
 golang.org/x/sys v0.6.0/go.mod h1:oPkhp1MJrh7nUepCBck5+mAzfO9JrbApNNgaTdGDITg=
-golang.org/x/sys v0.34.0 h1:H5Y5sJ2L2JRdyv7ROF1he/lPdvFsd0mJHFw2ThKHxLA=
-golang.org/x/sys v0.34.0/go.mod h1:BJP2sWEmIv4KK5OTEluFJCKSidICx8ciO85XgH3Ak8k=
+golang.org/x/sys v0.39.0 h1:CvCKL8MeisomCi6qNZ+wbb0DN9E5AATixKsvNtMoMFk=
+golang.org/x/sys v0.39.0/go.mod h1:OgkHotnGiDImocRcuBABYBEXf8A9a87e/uXjp9XT3ks=
 golang.org/x/term v0.0.0-20201126162022-7de9c90e9dd1/go.mod h1:bj7SfCRtBDWHUb9snDiAeCFNEtKQo2Wmx5Cou7ajbmo=
 golang.org/x/term v0.0.0-20210927222741-03fcf44c2211/go.mod h1:jbD1KX2456YbFQfuXm/mYQcufACuNUgVhRMnK/tPxf8=
 golang.org/x/text v0.3.0/go.mod h1:NqM8EUOU14njkJ3fqMW+pc6Ldnwhi/IjpwHt7yyuwOQ=

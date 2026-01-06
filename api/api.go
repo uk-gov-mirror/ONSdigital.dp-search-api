@@ -9,7 +9,7 @@ import (
 	"github.com/ONSdigital/dp-api-clients-go/v2/nlp/berlin"
 	"github.com/ONSdigital/dp-api-clients-go/v2/nlp/category"
 	"github.com/ONSdigital/dp-authorisation/auth"
-	"github.com/ONSdigital/dp-elasticsearch/v3/client"
+	"github.com/ONSdigital/dp-elasticsearch/v4/client"
 	health "github.com/ONSdigital/dp-healthcheck/healthcheck"
 	"github.com/ONSdigital/dp-search-api/config"
 	"github.com/ONSdigital/dp-search-api/query"

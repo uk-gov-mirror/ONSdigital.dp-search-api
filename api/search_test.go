@@ -18,7 +18,7 @@ import (
 	"github.com/ONSdigital/dp-api-clients-go/v2/nlp/category"
 	catErr "github.com/ONSdigital/dp-api-clients-go/v2/nlp/category/errors"
 	catModels "github.com/ONSdigital/dp-api-clients-go/v2/nlp/category/models"
-	"github.com/ONSdigital/dp-elasticsearch/v3/client"
+	"github.com/ONSdigital/dp-elasticsearch/v4/client"
 	"github.com/ONSdigital/dp-search-api/config"
 	"github.com/ONSdigital/dp-search-api/models"
 	"github.com/ONSdigital/dp-search-api/query"
