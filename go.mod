@@ -3,15 +3,15 @@ module github.com/ONSdigital/dp-search-api
 go 1.24.0
 
 require (
-	github.com/ONSdigital/dp-api-clients-go/v2 v2.267.0
+	github.com/ONSdigital/dp-api-clients-go/v2 v2.274.2
 	github.com/ONSdigital/dp-authorisation v0.5.0
-	github.com/ONSdigital/dp-component-test v1.2.5-alpha
+	github.com/ONSdigital/dp-component-test v1.2.6-alpha
 	github.com/ONSdigital/dp-elasticsearch/v3 v3.0.4
 	github.com/ONSdigital/dp-healthcheck v1.6.4
-	github.com/ONSdigital/dp-net/v3 v3.3.0
+	github.com/ONSdigital/dp-net/v3 v3.10.0
 	github.com/ONSdigital/dp-otel-go v0.0.8
-	github.com/ONSdigital/dp-search-scrubber-api v0.7.0
-	github.com/ONSdigital/log.go/v2 v2.4.6
+	github.com/ONSdigital/dp-search-scrubber-api v0.9.1
+	github.com/ONSdigital/log.go/v2 v2.5.1
 	github.com/cucumber/godog v0.15.0
 	github.com/elastic/go-elasticsearch/v7 v7.10.0
 	github.com/google/go-cmp v0.7.0
@@ -109,7 +109,7 @@ require (
 	github.com/sirupsen/logrus v1.9.3 // indirect
 	github.com/smarty/assertions v1.16.0 // indirect
 	github.com/spf13/pflag v1.0.6 // indirect
-	github.com/stretchr/testify v1.10.0 // indirect
+	github.com/stretchr/testify v1.11.1 // indirect
 	github.com/tdewolff/parse v2.3.4+incompatible // indirect
 	github.com/tdewolff/test v1.0.11 // indirect
 	github.com/testcontainers/testcontainers-go v0.39.0 // indirect
@@ -123,22 +123,22 @@ require (
 	github.com/youmark/pkcs8 v0.0.0-20240726163527-a2c0da244d78 // indirect
 	github.com/yusufpapurcu/wmi v1.2.4 // indirect
 	go.mongodb.org/mongo-driver v1.17.4 // indirect
-	go.opentelemetry.io/auto/sdk v1.1.0 // indirect
+	go.opentelemetry.io/auto/sdk v1.2.1 // indirect
 	go.opentelemetry.io/contrib/propagators/autoprop v0.60.0 // indirect
 	go.opentelemetry.io/contrib/propagators/aws v1.35.0 // indirect
 	go.opentelemetry.io/contrib/propagators/b3 v1.35.0 // indirect
 	go.opentelemetry.io/contrib/propagators/jaeger v1.35.0 // indirect
 	go.opentelemetry.io/contrib/propagators/ot v1.35.0 // indirect
-	go.opentelemetry.io/otel v1.37.0 // indirect
+	go.opentelemetry.io/otel v1.38.0 // indirect
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace v1.35.0 // indirect
 	go.opentelemetry.io/otel/exporters/otlp/otlptrace/otlptracegrpc v1.35.0 // indirect
-	go.opentelemetry.io/otel/metric v1.37.0 // indirect
+	go.opentelemetry.io/otel/metric v1.38.0 // indirect
 	go.opentelemetry.io/otel/sdk v1.37.0 // indirect
-	go.opentelemetry.io/otel/trace v1.37.0 // indirect
+	go.opentelemetry.io/otel/trace v1.38.0 // indirect
 	go.opentelemetry.io/proto/otlp v1.5.0 // indirect
 	go.uber.org/multierr v1.11.0 // indirect
-	golang.org/x/crypto v0.40.0 // indirect
-	golang.org/x/net v0.42.0 // indirect
+	golang.org/x/crypto v0.42.0 // indirect
+	golang.org/x/net v0.44.0 // indirect
 	golang.org/x/sync v0.17.0 // indirect
 	golang.org/x/sys v0.36.0 // indirect
 	golang.org/x/text v0.29.0 // indirect
