@@ -139,7 +139,7 @@ func SearchReleasesHandlerFunc(validator QueryParamValidator, builder ReleaseQue
 		}
 
 		w.Header().Set("Content-Type", "application/json;charset=utf-8")
-		_, err = w.Write(responseData)
+		_, err = w.Write(responseData) //nolint:gosec // G705 - false positive, responseData is JSON with correct Content-Type
 		if err != nil {
 			log.Error(ctx, "writing response failed", err)
 			http.Error(w, "Failed to write http response", http.StatusInternalServerError)

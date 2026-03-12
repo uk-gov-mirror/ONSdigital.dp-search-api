@@ -146,7 +146,7 @@ func (f *FakeAPI) getMockAPIHTTPClient() *dphttp.ClienterMock {
 		SetPathsWithNoRetriesFunc: func(paths []string) {},
 		GetPathsWithNoRetriesFunc: func() []string { return []string{} },
 		DoFunc: func(ctx context.Context, req *http.Request) (*http.Response, error) {
-			return f.fakeHTTP.Server.Client().Do(req)
+			return f.fakeHTTP.Server.Client().Do(req) //nolint:gosec // G704 - false positive, test code using fake server
 		},
 	}
 }
