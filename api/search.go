@@ -44,6 +44,8 @@ const (
 	ParamDatasetIDs         = "dataset_ids"
 	ParamURIPrefix          = "uri_prefix"
 	ParamCDIDs              = "cdids"
+
+	disallowedLabel = "disallowed"
 )
 
 // defaultContentTypes is an array of all valid content types, which is the default param value
@@ -122,7 +124,7 @@ func parseURIPrefix(ctx context.Context, params url.Values) (uriPrefix string, e
 		var uriPrefixErr error
 		uriPrefix, uriPrefixErr = validateURIPrefix(uriPrefix)
 		if uriPrefixErr != nil {
-			log.Warn(ctx, uriPrefixErr.Error(), log.Data{"param": ParamURIPrefix, "value": uriPrefix})
+			log.Warn(ctx, uriPrefixErr.Error(), log.Data{paramLabel: ParamURIPrefix, valueLabel: uriPrefix})
 			return "", uriPrefixErr
 		}
 	}
@@ -223,7 +225,7 @@ func CreateRequests(w http.ResponseWriter, req *http.Request, cfg *config.Config
 	fromDateParam := paramGet(params, "fromDate", "")
 	fromDate, err := validator.Validate(ctx, "date", fromDateParam)
 	if err != nil {
-		log.Warn(ctx, err.Error(), log.Data{"param": "fromDate", "value": fromDateParam})
+		log.Warn(ctx, err.Error(), log.Data{paramLabel: "fromDate", valueLabel: fromDateParam})
 		http.Error(w, "Invalid fromDate parameter", http.StatusBadRequest)
 		return "", nil, nil
 	}
@@ -231,7 +233,7 @@ func CreateRequests(w http.ResponseWriter, req *http.Request, cfg *config.Config
 	toDateParam := paramGet(params, "toDate", "")
 	toDate, err := validator.Validate(ctx, "date", toDateParam)
 	if err != nil {
-		log.Warn(ctx, err.Error(), log.Data{"param": "toDateParam", "value": toDateParam})
+		log.Warn(ctx, err.Error(), log.Data{paramLabel: "toDateParam", valueLabel: toDateParam})
 		http.Error(w, "Invalid toDate parameter", http.StatusBadRequest)
 		return "", nil, nil
 	}
@@ -295,7 +297,7 @@ func parseCDID(ctx context.Context, params url.Values) (cdids []string, err erro
 		cdids = strings.Split(cdidParam, ",")
 		disallowed, validationErr := validateCDIDs(cdids)
 		if validationErr != nil {
-			log.Warn(ctx, validationErr.Error(), log.Data{"param": ParamCDIDs, "value": cdidParam, "disallowed": disallowed})
+			log.Warn(ctx, validationErr.Error(), log.Data{paramLabel: ParamCDIDs, valueLabel: cdidParam, disallowedLabel: disallowed})
 			return nil, validationErr
 		}
 	}
@@ -306,7 +308,7 @@ func parseLimit(ctx context.Context, params url.Values, validator QueryParamVali
 	limitParam := paramGet(params, ParamLimit, "10")
 	validatedLimit, validationErr := validator.Validate(ctx, ParamLimit, limitParam)
 	if validationErr != nil {
-		log.Warn(ctx, validationErr.Error(), log.Data{"param": ParamLimit, "value": limitParam})
+		log.Warn(ctx, validationErr.Error(), log.Data{paramLabel: ParamLimit, valueLabel: limitParam})
 		return 0, errors.New("invalid limit parameter")
 	}
 	return validatedLimit.(int), nil
@@ -316,7 +318,7 @@ func parseOffset(ctx context.Context, params url.Values, validator QueryParamVal
 	offsetParam := paramGet(params, ParamOffset, "0")
 	validatedOffset, validationErr := validator.Validate(ctx, ParamOffset, offsetParam)
 	if validationErr != nil {
-		log.Warn(ctx, validationErr.Error(), log.Data{"param": ParamOffset, "value": offsetParam})
+		log.Warn(ctx, validationErr.Error(), log.Data{paramLabel: ParamOffset, valueLabel: offsetParam})
 		return 0, errors.New("invalid offset parameter")
 	}
 	return validatedOffset.(int), nil
@@ -329,7 +331,7 @@ func parseAndValidateContentTypes(ctx context.Context, params url.Values) (conte
 		contentTypes = strings.Split(contentTypesParam, ",")
 		disallowed, validationErr := validateContentTypes(contentTypes)
 		if validationErr != nil {
-			log.Warn(ctx, validationErr.Error(), log.Data{"param": ParamContentType, "value": contentTypesParam, "disallowed": disallowed})
+			log.Warn(ctx, validationErr.Error(), log.Data{paramLabel: ParamContentType, valueLabel: contentTypesParam, disallowedLabel: disallowed})
 			return nil, fmt.Errorf("invalid content_type(s): %s", strings.Join(disallowed, ","))
 		}
 	}
@@ -340,7 +342,7 @@ func parseAndValidateSort(ctx context.Context, cfg *config.Config, params url.Va
 	sortParam := paramGet(params, ParamSort, cfg.DefaultSort)
 	validatedSort, validationErr := validator.Validate(ctx, ParamSort, sortParam)
 	if validationErr != nil {
-		log.Warn(ctx, validationErr.Error(), log.Data{"param": ParamSort, "value": sortParam})
+		log.Warn(ctx, validationErr.Error(), log.Data{paramLabel: ParamSort, valueLabel: sortParam})
 		return "", errors.New("invalid sort parameter")
 	}
 	return validatedSort.(string), nil
@@ -407,7 +409,7 @@ func parseDatasetIDs(ctx context.Context, params url.Values) (datasetIDs []strin
 		datasetIDs = sanitiseURLParams(datasetIDParam)
 		disallowed, validationErr := validateDatasetIDs(datasetIDs)
 		if validationErr != nil {
-			log.Warn(ctx, validationErr.Error(), log.Data{"param": ParamDatasetIDs, "value": datasetIDParam, "disallowed": disallowed})
+			log.Warn(ctx, validationErr.Error(), log.Data{paramLabel: ParamDatasetIDs, valueLabel: datasetIDParam, disallowedLabel: disallowed})
 			return nil, fmt.Errorf("invalid dataset_ids: %s", strings.Join(disallowed, ","))
 		}
 	}
@@ -440,7 +442,7 @@ func parseTopics(ctx context.Context, params url.Values) (topics []string, err e
 		topics = sanitiseURLParams(topicsParam)
 		disallowed, validationErr := validateTopics(topics)
 		if validationErr != nil {
-			log.Warn(ctx, validationErr.Error(), log.Data{"param": ParamTopics, "value": topicsParam, "disallowed": disallowed})
+			log.Warn(ctx, validationErr.Error(), log.Data{paramLabel: ParamTopics, valueLabel: topicsParam, disallowedLabel: disallowed})
 			return nil, fmt.Errorf("invalid topics: %s", strings.Join(disallowed, ","))
 		}
 	}

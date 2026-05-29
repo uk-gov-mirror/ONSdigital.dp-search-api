@@ -10,6 +10,13 @@ import (
 	"github.com/ONSdigital/log.go/v2/log"
 )
 
+const (
+	paramLabel    = "param"
+	valueLabel    = "value"
+	fromDateLabel = "fromDate"
+	toDateLabel   = "toDate"
+)
+
 func CreateReleaseRequest(w http.ResponseWriter, req *http.Request, validator QueryParamValidator) (string, *query.ReleaseSearchRequest) {
 	ctx := req.Context()
 	params := req.URL.Query()
@@ -20,7 +27,7 @@ func CreateReleaseRequest(w http.ResponseWriter, req *http.Request, validator Qu
 	limitParam := paramGet(params, ParamLimit, "10")
 	limit, err := validator.Validate(ctx, ParamLimit, limitParam)
 	if err != nil {
-		log.Warn(ctx, err.Error(), log.Data{"param": ParamLimit, "value": limitParam})
+		log.Warn(ctx, err.Error(), log.Data{paramLabel: ParamLimit, valueLabel: limitParam})
 		http.Error(w, "Invalid limit parameter", http.StatusBadRequest)
 		return "", nil
 	}
@@ -28,7 +35,7 @@ func CreateReleaseRequest(w http.ResponseWriter, req *http.Request, validator Qu
 	offsetParam := paramGet(params, ParamOffset, "0")
 	offset, err := validator.Validate(ctx, ParamOffset, offsetParam)
 	if err != nil {
-		log.Warn(ctx, err.Error(), log.Data{"param": ParamOffset, "value": offsetParam})
+		log.Warn(ctx, err.Error(), log.Data{paramLabel: ParamOffset, valueLabel: offsetParam})
 		http.Error(w, "Invalid offset parameter", http.StatusBadRequest)
 		return "", nil
 	}
@@ -36,29 +43,29 @@ func CreateReleaseRequest(w http.ResponseWriter, req *http.Request, validator Qu
 	sortParam := paramGet(params, ParamSort, query.RelDateAsc.String())
 	sort, err := validator.Validate(ctx, ParamSort, sortParam)
 	if err != nil {
-		log.Warn(ctx, err.Error(), log.Data{"param": ParamSort, "value": sortParam})
+		log.Warn(ctx, err.Error(), log.Data{paramLabel: ParamSort, valueLabel: sortParam})
 		http.Error(w, "Invalid sort parameter", http.StatusBadRequest)
 		return "", nil
 	}
 
-	fromDateParam := paramGet(params, "fromDate", "")
+	fromDateParam := paramGet(params, fromDateLabel, "")
 	fromDate, err := validator.Validate(ctx, "date", fromDateParam)
 	if err != nil {
-		log.Warn(ctx, err.Error(), log.Data{"param": "fromDate", "value": fromDateParam})
+		log.Warn(ctx, err.Error(), log.Data{paramLabel: fromDateLabel, valueLabel: fromDateParam})
 		http.Error(w, "Invalid fromDate parameter", http.StatusBadRequest)
 		return "", nil
 	}
 
-	toDateParam := paramGet(params, "toDate", "")
+	toDateParam := paramGet(params, toDateLabel, "")
 	toDate, err := validator.Validate(ctx, "date", toDateParam)
 	if err != nil {
-		log.Warn(ctx, err.Error(), log.Data{"param": "toDate", "value": toDateParam})
+		log.Warn(ctx, err.Error(), log.Data{paramLabel: toDateLabel, valueLabel: toDateParam})
 		http.Error(w, "Invalid toDate parameter", http.StatusBadRequest)
 		return "", nil
 	}
 
 	if fromAfterTo(fromDate.(query.Date), toDate.(query.Date)) {
-		log.Warn(ctx, "fromDate after toDate", log.Data{"fromDate": fromDateParam, "toDate": toDateParam})
+		log.Warn(ctx, "fromDate after toDate", log.Data{fromDateLabel: fromDateParam, toDateLabel: toDateParam})
 		http.Error(w, "invalid dates - 'from' after 'to'", http.StatusBadRequest)
 		return "", nil
 	}
@@ -66,7 +73,7 @@ func CreateReleaseRequest(w http.ResponseWriter, req *http.Request, validator Qu
 	relTypeParam := paramGet(params, "release-type", query.Published.String())
 	relType, err := validator.Validate(ctx, "release-type", relTypeParam)
 	if err != nil {
-		log.Warn(ctx, err.Error(), log.Data{"param": "release-type", "value": relTypeParam})
+		log.Warn(ctx, err.Error(), log.Data{paramLabel: "release-type", valueLabel: relTypeParam})
 		http.Error(w, "Invalid release-type parameter", http.StatusBadRequest)
 		return "", nil
 	}
