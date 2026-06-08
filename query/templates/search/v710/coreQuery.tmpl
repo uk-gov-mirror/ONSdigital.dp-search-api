@@ -63,15 +63,6 @@
           }
         },
         {
-          "match": {
-            "keywords": {
-              "query": "{{.Term}}",
-              "operator": "AND",
-              "boost": 10.0
-            }
-          }
-        },
-        {
           "multi_match": {
             "query": "{{.Term}}",
             "fields": [
