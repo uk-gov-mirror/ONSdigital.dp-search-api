@@ -53,15 +53,6 @@
                 "type": "best_fields",
                 "minimum_should_match": "75%"
             }
-        },
-        {
-            "match": {
-                "keywords": {
-                    "query": "{{.Term}}",
-                    "operator": "AND",
-                    "boost": 10.0
-                }
-            }
         }
     ]
 }
