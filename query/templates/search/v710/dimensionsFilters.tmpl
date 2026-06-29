@@ -1,40 +1,40 @@
-{{range $i,$dim := .Dimensions}}
-    {{if $i}},{{end}}
-    {
-        "bool": {
-            "should": [
-                {{ if $dim.Key }}
-                {
-                    "match":{
-                        "dimensions.key": "{{$dim.Key}}"
-                    }
-                },
-                {{ end }}
-                {{ if $dim.AggKey }}
-                {
-                    "match":{
-                        "dimensions.agg_key": "{{$dim.AggKey}}"
-                    }
-                },
-                {{ end }}
-                {{ if $dim.Name }}
-                {
-                    "match":{
-                        "dimensions.name": "{{$dim.Name}}"
-                    }
-                },
-                {{ end }}
-                {
-                    "match":{
-                        "dimensions.label": "{{$dim.Label}}"
-                    }
-                },
-                {
-                    "match":{
-                        "dimensions.raw_label": "{{$dim.RawLabel}}"
-                    }
-                }
-            ]
+{{ range $i,$dim := .Dimensions }}
+{{ if $i }},{{ end }}
+{
+  "bool": {
+    "should": [
+      {{ if $dim.Key }}
+      {
+        "match": {
+          "dimensions.key": "{{ $dim.Key }}"
         }
-    }
-{{end}}
+      },
+      {{ end }}
+      {{ if $dim.AggKey }}
+      {
+        "match": {
+          "dimensions.agg_key": "{{ $dim.AggKey }}"
+        }
+      },
+      {{ end }}
+      {{ if $dim.Name }}
+      {
+        "match": {
+          "dimensions.name": "{{ $dim.Name }}"
+        }
+      },
+      {{ end }}
+      {
+        "match": {
+          "dimensions.label": "{{ $dim.Label }}"
+        }
+      },
+      {
+        "match": {
+          "dimensions.raw_label": "{{ $dim.RawLabel }}"
+        }
+      }
+    ]
+  }
+}
+{{ end }}

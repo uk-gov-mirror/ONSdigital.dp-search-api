@@ -1,14 +1,14 @@
 ,
-"filter" : [
+"filter": [
 {
   "bool": {
     "must": [
       {
         "bool": {
           "should": [
-            {{ template "topicFilters.tmpl". }}
-            {{ template "contentFilterOnURIPrefix.tmpl". }}
-            {{ template "contentFilterOnTopicWildcard.tmpl". }}
+            {{ template "topicFilters.tmpl" . }}
+            {{ template "contentFilterOnURIPrefix.tmpl" . }}
+            {{ template "contentFilterOnTopicWildcard.tmpl" . }}
           ]
         }
       }
@@ -16,7 +16,7 @@
       , {
         "bool": {
           "should": [
-            {{ template "populationTypeFilters.tmpl". }}
+            {{ template "populationTypeFilters.tmpl" . }}
           ]
         }
       }
@@ -25,7 +25,7 @@
       , {
         "bool": {
           "should": [
-            {{ template "uriFilters.tmpl". }}
+            {{ template "uriFilters.tmpl" . }}
           ]
         }
       }
@@ -34,7 +34,7 @@
       , {
         "bool": {
           "must": [
-            {{ template "dimensionsFilters.tmpl". }}
+            {{ template "dimensionsFilters.tmpl" . }}
           ]
         }
       }

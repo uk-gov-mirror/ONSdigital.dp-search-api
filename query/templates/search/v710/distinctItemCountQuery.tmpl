@@ -1,23 +1,27 @@
-{ {{/* count query */}}
-{{if .CountEnable}}
-"query" : {
-    "bool" : {
-      "must" : [{
-      {{- if .Term}}
-        {{- template "coreQuery.tmpl" .}}
-      {{- else}}
-        {{- template "matchAll.tmpl" .}}
-      {{- end}}
-      },{
-        "bool": {
+{{- /* count query */ -}}
+{
+  {{ if .CountEnable }}
+  "query": {
+    "bool": {
+      "must": [
+        {
+          {{- if .Term }}
+          {{- template "coreQuery.tmpl" . }}
+          {{- else }}
+          {{- template "matchAll.tmpl" . }}
+          {{- end }}
+        },
+        {
+          "bool": {
             "must": {
-                "exists": {
-             	    "field": "topics"
-             	}
+              "exists": {
+                "field": "topics"
+              }
             }
-        }}
+          }
+        }
       ]
     }
-}
-{{end}}
+  }
+  {{ end }}
 }

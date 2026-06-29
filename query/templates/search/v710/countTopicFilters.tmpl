@@ -1,51 +1,51 @@
 ,
-"filter" : [
-{
-  "bool": {
-    "must": [
-      {
-        "bool": {
-          "should": [
-            {{ template "contentTypeFilter.tmpl". }}
-          ]
+"filter": [
+  {
+    "bool": {
+      "must": [
+        {
+          "bool": {
+            "should": [
+              {{ template "contentTypeFilter.tmpl" . }}
+            ]
+          }
         }
-      }
-      {{if .URIPrefix}}
-      , {
-        "bool": {
-          "should": [
-            {{ template "contentFilterOnURIPrefix.tmpl". }}
-          ]
+        {{ if .URIPrefix }}
+        , {
+          "bool": {
+            "should": [
+              {{ template "contentFilterOnURIPrefix.tmpl" . }}
+            ]
+          }
         }
-      }
-      {{ end }}
-      {{ if .URIs }}
-      , {
-        "bool": {
-          "should": [
-            {{ template "uriFilters.tmpl". }}
-          ]
+        {{ end }}
+        {{ if .URIs }}
+        , {
+          "bool": {
+            "should": [
+              {{ template "uriFilters.tmpl" . }}
+            ]
+          }
         }
-      }
-      {{ end }}
-      {{ if .PopulationTypes }}
-      , {
-        "bool": {
-          "should": [
-            {{ template "populationTypeFilters.tmpl". }}
-          ]
+        {{ end }}
+        {{ if .PopulationTypes }}
+        , {
+          "bool": {
+            "should": [
+              {{ template "populationTypeFilters.tmpl" . }}
+            ]
+          }
         }
-      }
-      {{ end }}
-      {{ if .Dimensions }}
-      , {
-        "bool": {
-          "must": [
-            {{ template "dimensionsFilters.tmpl". }}
-          ]
+        {{ end }}
+        {{ if .Dimensions }}
+        , {
+          "bool": {
+            "must": [
+              {{ template "dimensionsFilters.tmpl" . }}
+            ]
+          }
         }
-      }
-      {{ end }}
+        {{ end }}
       ]
     }
   }

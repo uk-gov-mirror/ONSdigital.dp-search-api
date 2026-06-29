@@ -1,7 +1,8 @@
-{{range $i,$e := .Topic}}
-,{
-   "match":{
-      "topics": "{{.}}"
-   }
+{{ range $i,$e := .Topic }}
+,
+{
+  "match": {
+    "topics": "{{ . }}"
+  }
 }
-{{end}}
+{{ end }}

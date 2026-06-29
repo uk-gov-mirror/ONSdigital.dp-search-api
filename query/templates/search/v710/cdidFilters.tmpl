@@ -1,8 +1,8 @@
-{{range $i,$e := .CDIDs}}
-{{if $i}},{{end}}
+{{ range $i,$e := .CDIDs }}
+{{ if $i }},{{ end }}
 {
-   "match":{
-      "cdid": "{{.}}"
-   }
+  "match": {
+    "cdid": "{{ . }}"
+  }
 }
-{{end}}
+{{ end }}

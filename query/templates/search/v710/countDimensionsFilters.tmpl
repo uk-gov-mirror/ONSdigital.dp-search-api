@@ -1,44 +1,44 @@
 ,
-"filter" : [
-{
-  "bool": {
-    "must": [
-      {
-        "bool": {
-          "should": [
-            {{ template "contentTypeFilter.tmpl". }}
-          ]
+"filter": [
+  {
+    "bool": {
+      "must": [
+        {
+          "bool": {
+            "should": [
+              {{ template "contentTypeFilter.tmpl" . }}
+            ]
+          }
         }
-      }
-      {{if or .URIPrefix .TopicWildcard .Topic}}
-      , {
-        "bool": {
-          "should": [
-            {{ template "topicFilters.tmpl". }}
-            {{ template "contentFilterOnURIPrefix.tmpl". }}
-            {{ template "contentFilterOnTopicWildcard.tmpl". }}
-          ]
+        {{ if or .URIPrefix .TopicWildcard .Topic }}
+        , {
+          "bool": {
+            "should": [
+              {{ template "topicFilters.tmpl" . }}
+              {{ template "contentFilterOnURIPrefix.tmpl" . }}
+              {{ template "contentFilterOnTopicWildcard.tmpl" . }}
+            ]
+          }
         }
-      }
-      {{ end }}
-      {{ if .URIs }}
-      , {
-        "bool": {
-          "should": [
-            {{ template "uriFilters.tmpl". }}
-          ]
+        {{ end }}
+        {{ if .URIs }}
+        , {
+          "bool": {
+            "should": [
+              {{ template "uriFilters.tmpl" . }}
+            ]
+          }
         }
-      }
-      {{ end }}
-      {{ if .PopulationTypes }}
-      , {
-        "bool": {
-          "should": [
-            {{ template "populationTypeFilters.tmpl". }}
-          ]
+        {{ end }}
+        {{ if .PopulationTypes }}
+        , {
+          "bool": {
+            "should": [
+              {{ template "populationTypeFilters.tmpl" . }}
+            ]
+          }
         }
-      }
-      {{ end }}
+        {{ end }}
       ]
     }
   }

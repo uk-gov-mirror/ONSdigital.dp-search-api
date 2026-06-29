@@ -1,1 +1,8 @@
-{ /* content query */{{if .Index}} "index":"{{.Index}}"{{else}} "index":"ons"{{end}} }
+/* content query */
+{
+  {{  if .Index }}
+  "index": "{{ .Index }}"
+  {{ else }}
+  "index": "ons"
+  {{ end }}
+}

@@ -1,7 +1,8 @@
-{ {{/* content type count query */}}
-    {{if .Index}}
-        "index":"{{.Index}}"
-    {{else}}
-        "index":"ons"
-    {{end}}
+{{- /* content type count query */ -}}
+{
+  {{ if .Index }}
+  "index": "{{ .Index }}"
+  {{ else }}
+  "index": "ons"
+  {{ end }}
 }

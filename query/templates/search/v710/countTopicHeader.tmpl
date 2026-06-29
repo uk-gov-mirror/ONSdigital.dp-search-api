@@ -1,7 +1,8 @@
-{ {{/* topic count query */}}
-    {{if .Index}}
-        "index":"{{.Index}}"
-    {{else}}
-        "index":"ons"
-    {{end}}
+{{- /* topic count query */ -}}
+{
+  {{ if .Index }}
+  "index": "{{ .Index }}"
+  {{ else }}
+  "index": "ons"
+  {{ end }}
 }

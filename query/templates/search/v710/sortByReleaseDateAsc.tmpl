@@ -1,15 +1,17 @@
-{{/*
-release_date_asc(
-            get(Field.releaseDate, SortOrder.ASC),
-            get(Field._score, SortOrder.DESC)
-    )
-*/}}
-"sort" : [{
-       "release_date" : {
-            "order" : "asc"
-            }
-    }, {
-        "_score" : {
-            "order" : "desc"
-        }
-    }]
+{{- /* release_date_asc(
+  get(Field.releaseDate, SortOrder.ASC),
+  get(Field._score, SortOrder.DESC)
+)
+*/ -}}
+"sort": [
+  {
+    "release_date": {
+      "order": "asc"
+    }
+  },
+  {
+    "_score": {
+      "order": "desc"
+    }
+  }
+]

@@ -1,8 +1,10 @@
 {{ if .TopicWildcard }}
-    {{range $i,$e := .TopicWildcard}}
-        {{if $i}},{{end}}
-            { "wildcard" :
-                    { "topic" : "{{.}}"  }
-            }
-    {{end}}
-{{end}}
+  {{ range $i,$e := .TopicWildcard }}
+    {{ if $i }},{{ end }}
+    {
+      "wildcard": {
+        "topic": "{{ . }}"
+      }
+    }
+  {{ end }}
+{{ end }}

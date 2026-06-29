@@ -1,8 +1,10 @@
-{{range $i,$e := .Types}}
-{{if $i}},{{end}}
-{
-   "match":{
-      "type": "{{.}}"
-   }
-}
-{{end}}
+{{ range $i,$e := .Types }}
+  {{ if $i }}
+  ,
+  {{ end }}
+  {
+    "match": {
+      "type": "{{ . }}"
+    }
+  }
+{{ end }}

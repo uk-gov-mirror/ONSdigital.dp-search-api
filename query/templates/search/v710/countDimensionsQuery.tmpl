@@ -1,23 +1,24 @@
-{ {{/* count query */}}
-"query" : {
-  "bool" : {
-    "must" : {
-      {{- if .Term}}
-        {{- template "coreQuery.tmpl" .}}
-      {{- else}}
-        {{- template "matchAll.tmpl" .}}
-      {{- end}}
-    }
-      {{template "countDimensionsFilters.tmpl" .}}
-    }
-  },
-  "size": 0,
-  "aggregations": {
-    "dimensions": {
-      "terms": {
-        "size": 1000,
-        "field":"{{.AggregationFields.Dimensions}}"
+{{- /* count query */ -}}
+{
+  "query": {
+    "bool": {
+      "must": {
+        {{- if .Term }}
+          {{- template "coreQuery.tmpl" . }}
+        {{- else }}
+          {{- template "matchAll.tmpl" . }}
+        {{- end }}
       }
-  	 }
+        {{ template "countDimensionsFilters.tmpl" . }}
+      }
+    },
+    "size": 0,
+    "aggregations": {
+      "dimensions": {
+        "terms": {
+          "size": 1000,
+          "field": "{{ .AggregationFields.Dimensions }}"
+        }
+      }
+    }
   }
-}
