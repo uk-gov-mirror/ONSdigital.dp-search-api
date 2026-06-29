@@ -81,7 +81,7 @@ func FormatMultiQuery(rawQuery []byte) ([]byte, error) {
 		}
 		searches = append(searches, client.Search{
 			Header: header,
-			Query:  query,
+			Query:  bytes.TrimSpace(query),
 		})
 	}
 	searchBytes, err := json.Marshal(searches)
