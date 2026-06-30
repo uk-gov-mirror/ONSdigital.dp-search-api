@@ -137,68 +137,67 @@ ons
     "release_types": {
       "filters": {
         "other_bucket_key": "cancelled",
-          "filters": {
-            "upcoming": {
-              "bool": {
-                "must": [
-                  {
-                    "term": {
-                      "published": false
-                    }
-                  },
-                  {
-                    "term": {
-                      "cancelled": false
-                    }
-                  },
-                  {
-                    "range": {
-                      "release_date": {
-                        "gte": {{ .Now }}
-                      }
+        "filters": {
+          "upcoming": {
+            "bool": {
+              "must": [
+                {
+                  "term": {
+                    "published": false
+                  }
+                },
+                {
+                  "term": {
+                    "cancelled": false
+                  }
+                },
+                {
+                  "range": {
+                    "release_date": {
+                      "gte": {{ .Now }}
                     }
                   }
-                ]
-              }
-            },
-            "outdated": {
-              "bool": {
-                "must": [
-                  {
-                    "term": {
-                      "published": false
-                    }
-                  },
-                  {
-                    "term": {
-                      "cancelled": false
-                    }
-                  },
-                  {
-                    "range": {
-                      "release_date": {
-                        "lt": {{ .Now }}
-                      }
+                }
+              ]
+            }
+          },
+          "outdated": {
+            "bool": {
+              "must": [
+                {
+                  "term": {
+                    "published": false
+                  }
+                },
+                {
+                  "term": {
+                    "cancelled": false
+                  }
+                },
+                {
+                  "range": {
+                    "release_date": {
+                      "lt": {{ .Now }}
                     }
                   }
-                ]
-              }
-            },
-            "published": {
-              "bool": {
-                "must": [
-                  {
-                    "term": {
-                      "published": true
-                    }
-                  },
-                  {
-                    "term": {
-                      "cancelled": false
-                    }
+                }
+              ]
+            }
+          },
+          "published": {
+            "bool": {
+              "must": [
+                {
+                  "term": {
+                    "published": true
                   }
-                ]
-              }
+                },
+                {
+                  "term": {
+                    "cancelled": false
+                  }
+                }
+              ]
             }
           }
         }
