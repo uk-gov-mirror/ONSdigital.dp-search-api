@@ -3,7 +3,7 @@ module github.com/ONSdigital/dp-search-api
 go 1.26.0
 
 require (
-	github.com/ONSdigital/dis-search-test-bed v0.0.0-20260709105017-006a48f902cb
+	github.com/ONSdigital/dis-search-test-bed v0.0.0-20260709114508-b0f0e7b88ed9
 	github.com/ONSdigital/dp-api-clients-go/v2 v2.269.0
 	github.com/ONSdigital/dp-authorisation v0.5.0
 	github.com/ONSdigital/dp-component-test v1.4.4-alpha

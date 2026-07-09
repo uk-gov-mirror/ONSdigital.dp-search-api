@@ -12,6 +12,8 @@ github.com/ONSdigital/dis-search-test-bed v0.0.0-20260709102721-c92e681b601a h1:
 github.com/ONSdigital/dis-search-test-bed v0.0.0-20260709102721-c92e681b601a/go.mod h1:qZVt7yPiBNmLpFCHUnAQQjnQt2qWQzY1AENewU5YGnw=
 github.com/ONSdigital/dis-search-test-bed v0.0.0-20260709105017-006a48f902cb h1:jIdtrM0uKpU+gqOF4EgPmB845ecJpYO9Qxel9pisr78=
 github.com/ONSdigital/dis-search-test-bed v0.0.0-20260709105017-006a48f902cb/go.mod h1:qZVt7yPiBNmLpFCHUnAQQjnQt2qWQzY1AENewU5YGnw=
+github.com/ONSdigital/dis-search-test-bed v0.0.0-20260709114508-b0f0e7b88ed9 h1:8i0f2f+LvyAwYctRzpLBosLvdi2G9B/UcZiZr3vkKuc=
+github.com/ONSdigital/dis-search-test-bed v0.0.0-20260709114508-b0f0e7b88ed9/go.mod h1:qZVt7yPiBNmLpFCHUnAQQjnQt2qWQzY1AENewU5YGnw=
 github.com/ONSdigital/dp-api-clients-go/v2 v2.269.0 h1:13QGPBu/NmIwmPhSP0yTlPEp/U1u22dEdyi8lN5guhA=
 github.com/ONSdigital/dp-api-clients-go/v2 v2.269.0/go.mod h1:bLseTP21r8LCStUEeOdVPyqtrTomOFP/azPjKWW4deA=
 github.com/ONSdigital/dp-authorisation v0.5.0 h1:k1ROJ+vgd1hDWyjj+ZdvSZGlZw73PN1k7CFVZhdyILA=
