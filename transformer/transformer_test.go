@@ -22,7 +22,6 @@ func TestTransform(t *testing.T) {
 		Highlight: &models.HighlightObj{
 			DatasetID: "",
 		},
-		PopulationType: "PopLbl1",
 		Dimensions: []models.ESDimensions{
 			{Name: "Dim1", Label: "Lbl1", RawLabel: "RawLbl1"},
 		},
@@ -40,7 +39,6 @@ func TestTransform(t *testing.T) {
 		Highlight: &models.HighlightObj{
 			DatasetID: "",
 		},
-		PopulationType: "PopLbl2",
 		Dimensions: []models.ESDimensions{
 			{Name: "Dim2", Label: "Lbl2", RawLabel: "RawLbl2"},
 		},
@@ -50,11 +48,6 @@ func TestTransform(t *testing.T) {
 	expectedDimensions := []models.FilterCount{
 		{Type: "dim1", Count: 246},
 		{Type: "dim2", Count: 642},
-	}
-
-	expectedPopulationTypes := []models.FilterCount{
-		{Type: "pop1", Count: 123},
-		{Type: "pop2", Count: 321},
 	}
 
 	c.Convey("Given a new instance of Transformer for ES7x with search responses successfully", t, func() {
@@ -74,7 +67,6 @@ func TestTransform(t *testing.T) {
 					c.So(transformedResponse.Items[1], c.ShouldResemble, expectedItem2)
 					c.So(transformedResponse.Topics[0], c.ShouldResemble, expectedTopic1)
 					c.So(transformedResponse.Dimensions, c.ShouldResemble, expectedDimensions)
-					c.So(transformedResponse.PopulationType, c.ShouldResemble, expectedPopulationTypes)
 					c.So(transformedResponse.Suggestions[0], c.ShouldResemble, "testSuggestion")
 				})
 			}
@@ -116,7 +108,6 @@ func prepareESMockResponse() models.EsResponses {
 		ReleaseDate:     "",
 		Title:           "anyTitle2",
 		Topics:          []string{"anyTopic1"},
-		PopulationType:  models.ESPopulationType{Name: "Pop1", Label: "PopLbl1"},
 		Dimensions: []models.ESDimensions{
 			{Name: "Dim1", Label: "Lbl1", RawLabel: "RawLbl1"},
 		},
@@ -132,7 +123,6 @@ func prepareESMockResponse() models.EsResponses {
 		ReleaseDate:     "",
 		Title:           "anyTitle2",
 		Topics:          []string{"anyTopic2"},
-		PopulationType:  models.ESPopulationType{Name: "Pop2", Label: "PopLbl2"},
 		Dimensions: []models.ESDimensions{
 			{Name: "Dim2", Label: "Lbl2", RawLabel: "RawLbl2"},
 		},
@@ -168,16 +158,6 @@ func prepareESMockResponse() models.EsResponses {
 		Count: 1,
 	}
 
-	populationTypeBucket1 := models.ESBucket{
-		Key:   "pop1",
-		Count: 123,
-	}
-
-	populationTypeBucket2 := models.ESBucket{
-		Key:   "pop2",
-		Count: 321,
-	}
-
 	dimensionBucket1 := models.ESBucket{
 		Key:   "dim1",
 		Count: 246,
@@ -207,12 +187,6 @@ func prepareESMockResponse() models.EsResponses {
 				Buckets: []models.ESBucket{
 					topicBucket1,
 					topicBucket2,
-				},
-			},
-			PopulationType: models.ESDocCounts{
-				Buckets: []models.ESBucket{
-					populationTypeBucket1,
-					populationTypeBucket2,
 				},
 			},
 			Dimensions: models.ESDocCounts{

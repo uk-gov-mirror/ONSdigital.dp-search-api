@@ -1,6 +1,6 @@
 swagger: "2.0"
 info:
-  description: "The Search and Release API lets you search and retrieve various releases. Use this API to query datasets, articles, and publications by search terms, content types, and filters like topics, population types, and dimensions. It supports pagination, sorting, and highlighting of search results. Additionally, it includes endpoints for checking the health status of the API and creating new Elasticsearch indexes."
+  description: "The Search and Release API lets you search and retrieve various releases. Use this API to query datasets, articles, and publications by search terms, content types, and filters like topics and dimensions. It supports pagination, sorting, and highlighting of search results. Additionally, it includes endpoints for checking the health status of the API and creating new Elasticsearch indexes."
   version: "1.0.0"
   title: "Search API"
   license:
@@ -57,14 +57,6 @@ paths:
         - in: query
           name: topics
           description: "Comma-separated list of topics to be returned."
-          type: array
-          items:
-            type: string
-          collectionFormat: csv
-          required: false
-        - in: query
-          name: population_types
-          description: "Comma-separated list of population type names to filter the results (or)."
           type: array
           items:
             type: string
@@ -404,11 +396,6 @@ definitions:
         description: "List of content types included in results"
         items:
           $ref: "#/definitions/CountItem"
-      population_type:
-        type: array
-        description: "List of population types included in results"
-        items:
-          $ref: "#/definitions/CountItem"
       topics:
         type: array
         description: "List of topics included in results"
@@ -547,9 +534,6 @@ definitions:
         type: string
       national_statistic:
         type: boolean
-      population_type:
-        type: string
-        description: "A population type a dataset is associated with e.g. Usual-Residents.  This is applicable to Census 2021 datasets only."
       provisional_date:
         type: string
       published:

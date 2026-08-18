@@ -259,12 +259,11 @@ func (t *Transformer) TransformCountResponse(
 // Transform the raw ES to search response
 func (t *Transformer) transform(esresponses *models.EsResponses, highlight bool) models.SearchResponse {
 	search7xResponse := models.SearchResponse{
-		Count:          esresponses.Responses[0].Hits.Total,
-		Items:          []models.Item{},
-		Topics:         []models.FilterCount{},
-		ContentTypes:   []models.FilterCount{},
-		PopulationType: []models.FilterCount{},
-		Dimensions:     []models.FilterCount{},
+		Count:        esresponses.Responses[0].Hits.Total,
+		Items:        []models.Item{},
+		Topics:       []models.FilterCount{},
+		ContentTypes: []models.FilterCount{},
+		Dimensions:   []models.FilterCount{},
 	}
 	var took int
 	for _, response := range esresponses.Responses {
@@ -280,11 +279,6 @@ func (t *Transformer) transform(esresponses *models.EsResponses, highlight bool)
 		search7xResponse.Topics = append(
 			search7xResponse.Topics,
 			transformCounts(response.Aggregations.Topic)...,
-		)
-
-		search7xResponse.PopulationType = append(
-			search7xResponse.PopulationType,
-			transformCounts(response.Aggregations.PopulationType)...,
 		)
 
 		search7xResponse.Dimensions = append(
@@ -350,7 +344,6 @@ func (t *Transformer) buildContentItem(doc models.ESResponseHit, highlight bool)
 		Language:        doc.Source.Language,
 		DateChanges:     doc.Source.DateChanges,
 		CanonicalTopic:  doc.Source.CanonicalTopic,
-		PopulationType:  doc.Source.PopulationType.Label,
 		Dimensions:      doc.Source.Dimensions,
 	}
 

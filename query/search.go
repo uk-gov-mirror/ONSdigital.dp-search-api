@@ -17,10 +17,9 @@ const (
 )
 
 var es710AggregationField = &AggregationFields{
-	Topics:          "topics",
-	ContentTypes:    "type",
-	PopulationTypes: "population_type.agg_key", // agg_key is {key}###{label} so aggregations on unique combinations of these will be obtained
-	Dimensions:      "dimensions.agg_key",      // agg_key is {key}###{label} so aggregations on unique combinations of these will be obtained
+	Topics:       "topics",
+	ContentTypes: "type",
+	Dimensions:   "dimensions.agg_key", // agg_key is {key}###{label} so aggregations on unique combinations of these will be obtained
 }
 
 // SearchRequest holds the values provided by a request against Search API
@@ -42,19 +41,11 @@ type SearchRequest struct {
 	NlpSubdivisionWords string
 	Topic               []string
 	TopicWildcard       []string
-	PopulationTypes     []*PopulationTypeRequest
 	Dimensions          []*DimensionRequest
 	Now                 string
 	DatasetIDs          []string
 	CDIDs               []string
 	URIs                []string
-}
-
-type PopulationTypeRequest struct {
-	Key    string
-	AggKey string
-	Name   string
-	Label  string
 }
 
 type DimensionRequest struct {
@@ -67,10 +58,9 @@ type DimensionRequest struct {
 
 // AggregationFields are the elasticsearch keys for which the aggregations will be done
 type AggregationFields struct {
-	Topics          string
-	ContentTypes    string
-	PopulationTypes string
-	Dimensions      string
+	Topics       string
+	ContentTypes string
+	Dimensions   string
 }
 
 type CountRequest struct {
@@ -130,9 +120,6 @@ func SetupV710Search() (*template.Template, error) {
 		"templates/search/v710/countTopicHeader.tmpl",
 		"templates/search/v710/countTopicQuery.tmpl",
 		"templates/search/v710/countTopicFilters.tmpl",
-		"templates/search/v710/countPopulationTypeHeader.tmpl",
-		"templates/search/v710/countPopulationTypeQuery.tmpl",
-		"templates/search/v710/countPopulationTypeFilters.tmpl",
 		"templates/search/v710/countDimensionsHeader.tmpl",
 		"templates/search/v710/countDimensionsQuery.tmpl",
 		"templates/search/v710/countDimensionsFilters.tmpl",
@@ -150,7 +137,6 @@ func SetupV710Search() (*template.Template, error) {
 		"templates/search/v710/sortByReleaseDate.tmpl",
 		"templates/search/v710/sortByReleaseDateAsc.tmpl",
 		"templates/search/v710/sortByFirstLetter.tmpl",
-		"templates/search/v710/populationTypeFilters.tmpl",
 		"templates/search/v710/dimensionsFilters.tmpl",
 		"templates/search/v710/nlpCategory.tmpl",
 		"templates/search/v710/nlpLocation.tmpl",

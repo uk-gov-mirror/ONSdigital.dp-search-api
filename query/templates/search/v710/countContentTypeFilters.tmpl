@@ -12,15 +12,6 @@
           ]
         }
       }
-      {{ if .PopulationTypes }}
-      , {
-        "bool": {
-          "should": [
-            {{ template "populationTypeFilters.tmpl" . }}
-          ]
-        }
-      }
-      {{ end }}
       {{ if .URIs }}
       , {
         "bool": {

@@ -30,15 +30,6 @@
           }
         }
         {{ end }}
-        {{ if .PopulationTypes }}
-        , {
-          "bool": {
-            "should": [
-              {{ template "populationTypeFilters.tmpl" . }}
-            ]
-          }
-        }
-        {{ end }}
       ]
     }
   }

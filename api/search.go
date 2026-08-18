@@ -34,7 +34,6 @@ const (
 	ParamLimit              = "limit"
 	ParamOffset             = "offset"
 	ParamContentType        = "content_type"
-	ParamPopulationTypes    = "population_types"
 	ParamDimensions         = "dimensions"
 	ParamSubtypeProvisional = "subtype-provisional"
 	ParamSubtypeConfirmed   = "subtype-confirmed"
@@ -265,8 +264,6 @@ func CreateRequests(w http.ResponseWriter, req *http.Request, cfg *config.Config
 	// Create SearchRequest
 	reqSearch := createSearchRequest(sanitisedQuery, offset, limit, contentTypes, fromDate.(query.Date), toDate.(query.Date), topics, sort, highlight, datasetIDs, uriPrefix, cdids, nlpCriteria)
 
-	// Process additional parameters like Population Types, Dimensions, and Dataset IDs
-	reqSearch.PopulationTypes = parsePopulationTypes(params)
 	reqSearch.Dimensions = parseDimensions(params)
 
 	// Create CountRequest
@@ -375,19 +372,6 @@ func createSearchRequest(sanitisedQuery string, offset, limit int, contentTypes 
 	}
 
 	return reqSearch
-}
-
-func parsePopulationTypes(params url.Values) []*query.PopulationTypeRequest {
-	popTypesParam := paramGet(params, ParamPopulationTypes, "")
-	if popTypesParam == "" {
-		return nil
-	}
-	popTypes := strings.Split(popTypesParam, ",")
-	p := make([]*query.PopulationTypeRequest, len(popTypes))
-	for i, popType := range popTypes {
-		p[i] = &query.PopulationTypeRequest{Key: popType}
-	}
-	return p
 }
 
 func parseDimensions(params url.Values) []*query.DimensionRequest {

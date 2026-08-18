@@ -562,7 +562,6 @@ func TestSearchHandlerFunc(t *testing.T) {
 				limit1+
 				offset2+
 				"&dimensions=dim1,dim2"+
-				"&population_types=pop1,pop2"+
 				"&fromDate=2020-10-10"+
 				"&toDate=2023-10-10"+
 				"&dataset_ids=QNA,QDA"+
@@ -586,9 +585,6 @@ func TestSearchHandlerFunc(t *testing.T) {
 		c.So(qbMock.BuildSearchQueryCalls()[0].Req.ReleasedBefore, c.ShouldResemble, query.MustParseDate("2023-10-10"))
 		c.So(qbMock.BuildSearchQueryCalls()[0].Req.Dimensions, c.ShouldResemble, []*query.DimensionRequest{
 			{Key: "dim1"}, {Key: "dim2"},
-		})
-		c.So(qbMock.BuildSearchQueryCalls()[0].Req.PopulationTypes, c.ShouldResemble, []*query.PopulationTypeRequest{
-			{Key: "pop1"}, {Key: "pop2"},
 		})
 		c.So(qbMock.BuildSearchQueryCalls()[0].Req.DatasetIDs, c.ShouldResemble, []string{"QNA", "QDA"})
 

@@ -296,23 +296,6 @@
           }
         }
       },
-      "population_type": {
-        "properties": {
-          "key": {
-            "type": "keyword"
-          },
-          "agg_key": {
-            "type": "keyword"
-          },
-          "name": {
-            "type":"keyword"
-          },
-          "label": {
-            "type":"text",
-            "analyzer":"ons_standard"
-          }
-        }
-      },
       "dimensions": {
         "properties": {
           "key": {

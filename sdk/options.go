@@ -63,12 +63,6 @@ func (o *Options) ContentType(val string) *Options {
 	return o
 }
 
-// PopulationTypes sets the 'population_types' Query parameter to the request
-func (o *Options) PopulationTypes(val string) *Options {
-	o.Query.Add(api.ParamPopulationTypes, val)
-	return o
-}
-
 // DatasetIDs sets the 'dataset_ids' Query parameter to the request
 func (o *Options) DatasetIDs(val string) *Options {
 	o.Query.Add(api.ParamDatasetIDs, val)

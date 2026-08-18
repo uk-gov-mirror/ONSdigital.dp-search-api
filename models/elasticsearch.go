@@ -45,7 +45,6 @@ type ESResponseHit struct {
 type ESResponseAggregations struct {
 	ContentTypes       ESDocCounts `json:"content_types"`
 	Topic              ESDocCounts `json:"topic"`
-	PopulationType     ESDocCounts `json:"population_type"`
 	Dimensions         ESDocCounts `json:"dimensions"`
 	DistinctTopicCount CountValue  `json:"distinct_topics_count"`
 }
@@ -84,7 +83,6 @@ type ESSourceDocument struct {
 	Published       bool                `json:"published,omitempty"`
 	Language        string              `json:"language,omitempty"`
 	Survey          string              `json:"survey,omitempty"`
-	PopulationType  ESPopulationType    `json:"population_type,omitempty"`
 	Dimensions      []ESDimensions      `json:"dimensions,omitempty"`
 }
 
@@ -110,11 +108,6 @@ type FilterCount struct {
 	Type  string `json:"type"`
 	Label string `json:"label"`
 	Count int    `json:"count"`
-}
-
-type ESPopulationType struct {
-	Name  string `json:"name"`
-	Label string `json:"label"`
 }
 
 type ESDimensions struct {
@@ -148,7 +141,6 @@ type Item struct {
 	Published       bool                `json:"published,omitempty"`
 	Language        string              `json:"language,omitempty"`
 	Survey          string              `json:"survey,omitempty"`
-	PopulationType  string              `json:"population_type,omitempty"`
 	Dimensions      []ESDimensions      `json:"dimensions,omitempty"`
 }
 
@@ -162,7 +154,6 @@ type SearchResponse struct {
 	Suggestions         []string      `json:"suggestions,omitempty"`
 	AdditionSuggestions []string      `json:"additional_suggestions,omitempty"`
 	Dimensions          []FilterCount `json:"dimensions,omitempty"`
-	PopulationType      []FilterCount `json:"population_type,omitempty"`
 }
 
 // ReleaseDateChange represent a date change of a release
