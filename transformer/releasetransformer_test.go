@@ -50,7 +50,7 @@ func TestTransformSearchReleaseResponse(t *testing.T) {
 			actual, err := transformer.TransformSearchResponse(ctx, sampleResponse, query.ReleaseSearchRequest{Term: "Education in Wales", Type: query.Upcoming, Size: 2, Provisional: true, Postponed: true}, false)
 			c.So(err, c.ShouldBeNil)
 			c.So(actual, c.ShouldNotBeEmpty)
-			var exp, act models.SearchResponseLegacy
+			var exp, act models.SearchResponse
 			c.So(json.Unmarshal(expected, &exp), c.ShouldBeNil)
 			c.So(json.Unmarshal(actual, &act), c.ShouldBeNil)
 			c.So(act, c.ShouldResemble, exp)

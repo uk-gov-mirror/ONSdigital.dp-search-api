@@ -739,65 +739,6 @@ func parseAndValidateSearchURIRequest(r *http.Request, validator QueryParamValid
 	return &req, nil
 }
 
-// LegacySearchHandlerFunc returns a http handler function handling search api requests.
-// TODO: This wil be deleted once the switch over is done to ES 7.10
-func LegacySearchHandlerFunc(validator QueryParamValidator, queryBuilder QueryBuilder, cfg *config.Config, clList *ClientList, transformer ResponseTransformer) http.HandlerFunc {
-	return func(w http.ResponseWriter, req *http.Request) {
-		ctx := req.Context()
-
-		params := req.URL.Query()
-
-		nlpCriteria := getNLPCriteria(ctx, params, cfg, queryBuilder, clList)
-
-		q, searchReq, countReq := CreateRequests(w, req, cfg, validator, nlpCriteria)
-		if searchReq == nil || countReq == nil {
-			return
-		}
-
-		formattedQuery, err := queryBuilder.BuildSearchQuery(ctx, searchReq, false)
-		if err != nil {
-			log.Error(ctx, "creation of search query failed", err, log.Data{
-				ParamQ:      q,
-				ParamSort:   searchReq.SortBy,
-				ParamLimit:  searchReq.Size,
-				ParamOffset: searchReq.From,
-			})
-			http.Error(w, "Failed to create search query", http.StatusInternalServerError)
-			return
-		}
-
-		responseData, err := clList.DeprecatedESClient.MultiSearch(ctx, "ons", "", formattedQuery)
-		if err != nil {
-			log.Error(ctx, "elasticsearch query failed", err)
-			http.Error(w, "Failed to run search query", http.StatusInternalServerError)
-			return
-		}
-
-		if !json.Valid(responseData) {
-			log.Error(ctx, "elastic search returned invalid JSON for search query", errors.New("elastic search returned invalid JSON for search query"))
-			http.Error(w, "Failed to process search query", http.StatusInternalServerError)
-			return
-		}
-
-		if !paramGetBool(params, "raw", false) {
-			responseData, err = transformer.TransformSearchResponse(ctx, responseData, q, searchReq.Highlight)
-			if err != nil {
-				log.Error(ctx, "transformation of response data failed", err)
-				http.Error(w, "Failed to transform search result", http.StatusInternalServerError)
-				return
-			}
-		}
-
-		w.Header().Set("Content-Type", "application/json;charset=utf-8")
-		_, err = w.Write(responseData) //nolint:gosec // G705 - false positive, responseData is JSON with correct Content-Type
-		if err != nil {
-			log.Error(ctx, "writing response failed", err)
-			http.Error(w, "Failed to write http response", http.StatusInternalServerError)
-			return
-		}
-	}
-}
-
 func getNLPCriteria(ctx context.Context, params url.Values, cfg *config.Config, queryBuilder QueryBuilder, clList *ClientList) *query.NlpCriteria {
 	nlpWeightingRequested := paramGetBool(params, ParamNLPWeighting, false)
 
@@ -863,7 +804,7 @@ func checkForSpecialCharacters(str string) bool {
 }
 
 func processSearchQuery(ctx context.Context, cfg *config.Config, elasticSearchClient DpElasticSearcher, queryBuilder QueryBuilder, reqParams *query.SearchRequest, responseDataChan chan []byte) {
-	formattedQuery, err := queryBuilder.BuildSearchQuery(ctx, reqParams, true)
+	formattedQuery, err := queryBuilder.BuildSearchQuery(ctx, reqParams)
 	if err != nil {
 		log.Error(ctx, "creation of search query failed", err, log.Data{
 			ParamQ:      reqParams.Term,

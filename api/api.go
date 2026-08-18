@@ -1,6 +1,6 @@
 package api
 
-//go:generate moq -out mocks.go -pkg api . ElasticSearcher DpElasticSearcher QueryParamValidator QueryBuilder ReleaseQueryBuilder ResponseTransformer AuthHandler ReleaseResponseTransformer
+//go:generate moq -out mocks.go -pkg api . DpElasticSearcher QueryParamValidator QueryBuilder ReleaseQueryBuilder ResponseTransformer AuthHandler ReleaseResponseTransformer
 
 import (
 	"context"
@@ -34,20 +34,11 @@ type ClientList struct {
 	CategoryClient category.Clienter
 	DpESClient     DpElasticSearcher
 	ScrubberClient scrubber.Clienter
-	// Remove deprecatedESClient once the legacy handler is removed
-	DeprecatedESClient ElasticSearcher
 }
 
 // AuthHandler provides authorisation checks on requests
 type AuthHandler interface {
 	Require(required auth.Permissions, handler http.HandlerFunc) http.HandlerFunc
-}
-
-// ElasticSearcher provides client methods for the elasticsearch package - now deprecated, due to be replaced
-// with the methods in dp-elasticsearch
-type ElasticSearcher interface {
-	Search(ctx context.Context, index string, docType string, request []byte) ([]byte, error)
-	MultiSearch(ctx context.Context, index string, docType string, request []byte) ([]byte, error)
 }
 
 // DpElasticSearcher provides an interface for the dp-elasticsearch functionality
@@ -60,14 +51,14 @@ type DpElasticSearcher interface {
 
 // QueryParamValidator provides an interface to validate api query parameters (used for /search/releases)
 type QueryParamValidator interface {
-	Validate(ctx context.Context, name, value string) (interface{}, error)
+	Validate(ctx context.Context, name, value string) (any, error)
 }
 
 // QueryBuilder provides methods for the search package
 type QueryBuilder interface {
 	AddNlpCategorySearch(nlpCriteria *query.NlpCriteria, category string, subCategory string, categoryWeighting float32) *query.NlpCriteria
 	AddNlpSubdivisionSearch(nlpCriteria *query.NlpCriteria, subdivisionWords string) *query.NlpCriteria
-	BuildSearchQuery(ctx context.Context, req *query.SearchRequest, esVersion710 bool) ([]byte, error)
+	BuildSearchQuery(ctx context.Context, req *query.SearchRequest) ([]byte, error)
 	BuildCountQuery(ctx context.Context, req *query.CountRequest) ([]byte, error)
 }
 
@@ -87,13 +78,12 @@ type ReleaseResponseTransformer interface {
 }
 
 // NewClientList returns a new ClientList obj with all available clients
-func NewClientList(brl berlin.Clienter, cat category.Clienter, dpEsClient DpElasticSearcher, scr scrubber.Clienter, deprecatedEs ElasticSearcher) *ClientList {
+func NewClientList(brl berlin.Clienter, cat category.Clienter, dpEsClient DpElasticSearcher, scr scrubber.Clienter) *ClientList {
 	return &ClientList{
-		BerlinClient:       brl,
-		CategoryClient:     cat,
-		DpESClient:         dpEsClient,
-		ScrubberClient:     scr,
-		DeprecatedESClient: deprecatedEs,
+		BerlinClient:   brl,
+		CategoryClient: cat,
+		DpESClient:     dpEsClient,
+		ScrubberClient: scr,
 	}
 }
 

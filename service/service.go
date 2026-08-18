@@ -11,7 +11,6 @@ import (
 	dphttp "github.com/ONSdigital/dp-net/v3/http"
 	"github.com/ONSdigital/dp-search-api/api"
 	"github.com/ONSdigital/dp-search-api/config"
-	"github.com/ONSdigital/dp-search-api/elasticsearch"
 	"github.com/ONSdigital/dp-search-api/query"
 	"github.com/ONSdigital/dp-search-api/transformer"
 	scrubber "github.com/ONSdigital/dp-search-scrubber-api/sdk"
@@ -24,19 +23,17 @@ import (
 )
 
 type Service struct {
-	api                 *api.SearchAPI
-	berlinClient        *berlin.Client
-	categoryClient      *category.Client
-	config              *config.Config
-	elasticSearchClient elasticsearch.Client
-	healthCheck         HealthChecker
-	queryBuilder        api.QueryBuilder
-	router              *mux.Router
-	server              HTTPServer
-	serviceList         *ExternalServiceList
-	searchTransformer   api.ResponseTransformer
-	scrubberClient      *scrubber.Client
-	releaseTransformer  api.ReleaseResponseTransformer
+	api                *api.SearchAPI
+	berlinClient       *berlin.Client
+	categoryClient     *category.Client
+	config             *config.Config
+	healthCheck        HealthChecker
+	queryBuilder       api.QueryBuilder
+	router             *mux.Router
+	server             HTTPServer
+	serviceList        *ExternalServiceList
+	scrubberClient     *scrubber.Client
+	releaseTransformer api.ReleaseResponseTransformer
 }
 
 // SetServer sets the http server for a service
@@ -54,16 +51,6 @@ func (svc *Service) SetQueryBuilder(queryBuilder api.QueryBuilder) {
 	svc.queryBuilder = queryBuilder
 }
 
-// SetElasticSearchClient sets the new instance of elasticsearch for a service
-func (svc *Service) SetElasticSearchClient(elasticSearchClient elasticsearch.Client) {
-	svc.elasticSearchClient = elasticSearchClient
-}
-
-// SetTransformer sets the transformer for a service
-func (svc *Service) SetTransformer(transformerClient *transformer.LegacyTransformer) {
-	svc.searchTransformer = transformerClient
-}
-
 // Run the service
 func Run(ctx context.Context, cfg *config.Config, serviceList *ExternalServiceList, buildTime, gitCommit, version string, svcErrors chan error) (svc *Service, err error) {
 	var esClientErr error
@@ -72,10 +59,6 @@ func Run(ctx context.Context, cfg *config.Config, serviceList *ExternalServiceLi
 	berlinClient := berlin.New(cfg.BerlinAPIURL)
 	categoryClient := category.New(cfg.CategoryAPIURL)
 	scrubberClient := scrubber.New(cfg.ScrubberAPIURL)
-	elasticHTTPClient := dphttp.NewClient()
-
-	// Initialise deprecatedESClient
-	deprecatedESClient := elasticsearch.New(cfg.ElasticSearchAPIURL, elasticHTTPClient, cfg.AWS.Region, cfg.AWS.Service)
 
 	// Initialise search transformer
 	searchTransformer := transformer.New()
@@ -133,8 +116,7 @@ func Run(ctx context.Context, cfg *config.Config, serviceList *ExternalServiceLi
 	}
 
 	// Create a ClientList to store all the required clients
-	// Remove deprecatedESClient once the legacy handler is removed
-	clList := api.NewClientList(berlinClient, categoryClient, esClient, scrubberClient, deprecatedESClient)
+	clList := api.NewClientList(berlinClient, categoryClient, esClient, scrubberClient)
 
 	if regErr := registerCheckers(ctx, healthCheck, clList); regErr != nil {
 		return nil, errors.Wrap(regErr, "unable to register checkers")
@@ -169,19 +151,17 @@ func Run(ctx context.Context, cfg *config.Config, serviceList *ExternalServiceLi
 	}()
 
 	return &Service{
-		api:                 searchAPI,
-		berlinClient:        berlinClient,
-		categoryClient:      categoryClient,
-		config:              cfg,
-		elasticSearchClient: *deprecatedESClient,
-		healthCheck:         healthCheck,
-		queryBuilder:        queryBuilder,
-		router:              router,
-		server:              server,
-		serviceList:         serviceList,
-		searchTransformer:   searchTransformer,
-		scrubberClient:      scrubberClient,
-		releaseTransformer:  releaseTransformer,
+		api:                searchAPI,
+		berlinClient:       berlinClient,
+		categoryClient:     categoryClient,
+		config:             cfg,
+		healthCheck:        healthCheck,
+		queryBuilder:       queryBuilder,
+		router:             router,
+		server:             server,
+		serviceList:        serviceList,
+		scrubberClient:     scrubberClient,
+		releaseTransformer: releaseTransformer,
 	}, nil
 }
 
