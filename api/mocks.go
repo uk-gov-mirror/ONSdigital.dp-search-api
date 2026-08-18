@@ -13,152 +13,6 @@ import (
 	"sync"
 )
 
-// Ensure, that ElasticSearcherMock does implement ElasticSearcher.
-// If this is not the case, regenerate this file with moq.
-var _ ElasticSearcher = &ElasticSearcherMock{}
-
-// ElasticSearcherMock is a mock implementation of ElasticSearcher.
-//
-//	func TestSomethingThatUsesElasticSearcher(t *testing.T) {
-//
-//		// make and configure a mocked ElasticSearcher
-//		mockedElasticSearcher := &ElasticSearcherMock{
-//			MultiSearchFunc: func(ctx context.Context, index string, docType string, request []byte) ([]byte, error) {
-//				panic("mock out the MultiSearch method")
-//			},
-//			SearchFunc: func(ctx context.Context, index string, docType string, request []byte) ([]byte, error) {
-//				panic("mock out the Search method")
-//			},
-//		}
-//
-//		// use mockedElasticSearcher in code that requires ElasticSearcher
-//		// and then make assertions.
-//
-//	}
-type ElasticSearcherMock struct {
-	// MultiSearchFunc mocks the MultiSearch method.
-	MultiSearchFunc func(ctx context.Context, index string, docType string, request []byte) ([]byte, error)
-
-	// SearchFunc mocks the Search method.
-	SearchFunc func(ctx context.Context, index string, docType string, request []byte) ([]byte, error)
-
-	// calls tracks calls to the methods.
-	calls struct {
-		// MultiSearch holds details about calls to the MultiSearch method.
-		MultiSearch []struct {
-			// Ctx is the ctx argument value.
-			Ctx context.Context
-			// Index is the index argument value.
-			Index string
-			// DocType is the docType argument value.
-			DocType string
-			// Request is the request argument value.
-			Request []byte
-		}
-		// Search holds details about calls to the Search method.
-		Search []struct {
-			// Ctx is the ctx argument value.
-			Ctx context.Context
-			// Index is the index argument value.
-			Index string
-			// DocType is the docType argument value.
-			DocType string
-			// Request is the request argument value.
-			Request []byte
-		}
-	}
-	lockMultiSearch sync.RWMutex
-	lockSearch      sync.RWMutex
-}
-
-// MultiSearch calls MultiSearchFunc.
-func (mock *ElasticSearcherMock) MultiSearch(ctx context.Context, index string, docType string, request []byte) ([]byte, error) {
-	if mock.MultiSearchFunc == nil {
-		panic("ElasticSearcherMock.MultiSearchFunc: method is nil but ElasticSearcher.MultiSearch was just called")
-	}
-	callInfo := struct {
-		Ctx     context.Context
-		Index   string
-		DocType string
-		Request []byte
-	}{
-		Ctx:     ctx,
-		Index:   index,
-		DocType: docType,
-		Request: request,
-	}
-	mock.lockMultiSearch.Lock()
-	mock.calls.MultiSearch = append(mock.calls.MultiSearch, callInfo)
-	mock.lockMultiSearch.Unlock()
-	return mock.MultiSearchFunc(ctx, index, docType, request)
-}
-
-// MultiSearchCalls gets all the calls that were made to MultiSearch.
-// Check the length with:
-//
-//	len(mockedElasticSearcher.MultiSearchCalls())
-func (mock *ElasticSearcherMock) MultiSearchCalls() []struct {
-	Ctx     context.Context
-	Index   string
-	DocType string
-	Request []byte
-} {
-	var calls []struct {
-		Ctx     context.Context
-		Index   string
-		DocType string
-		Request []byte
-	}
-	mock.lockMultiSearch.RLock()
-	calls = mock.calls.MultiSearch
-	mock.lockMultiSearch.RUnlock()
-	return calls
-}
-
-// Search calls SearchFunc.
-func (mock *ElasticSearcherMock) Search(ctx context.Context, index string, docType string, request []byte) ([]byte, error) {
-	if mock.SearchFunc == nil {
-		panic("ElasticSearcherMock.SearchFunc: method is nil but ElasticSearcher.Search was just called")
-	}
-	callInfo := struct {
-		Ctx     context.Context
-		Index   string
-		DocType string
-		Request []byte
-	}{
-		Ctx:     ctx,
-		Index:   index,
-		DocType: docType,
-		Request: request,
-	}
-	mock.lockSearch.Lock()
-	mock.calls.Search = append(mock.calls.Search, callInfo)
-	mock.lockSearch.Unlock()
-	return mock.SearchFunc(ctx, index, docType, request)
-}
-
-// SearchCalls gets all the calls that were made to Search.
-// Check the length with:
-//
-//	len(mockedElasticSearcher.SearchCalls())
-func (mock *ElasticSearcherMock) SearchCalls() []struct {
-	Ctx     context.Context
-	Index   string
-	DocType string
-	Request []byte
-} {
-	var calls []struct {
-		Ctx     context.Context
-		Index   string
-		DocType string
-		Request []byte
-	}
-	mock.lockSearch.RLock()
-	calls = mock.calls.Search
-	mock.lockSearch.RUnlock()
-	return calls
-}
-
 // Ensure, that DpElasticSearcherMock does implement DpElasticSearcher.
 // If this is not the case, regenerate this file with moq.
 var _ DpElasticSearcher = &DpElasticSearcherMock{}
@@ -403,7 +257,7 @@ var _ QueryParamValidator = &QueryParamValidatorMock{}
 //
 //		// make and configure a mocked QueryParamValidator
 //		mockedQueryParamValidator := &QueryParamValidatorMock{
-//			ValidateFunc: func(ctx context.Context, name string, value string) (interface{}, error) {
+//			ValidateFunc: func(ctx context.Context, name string, value string) (any, error) {
 //				panic("mock out the Validate method")
 //			},
 //		}
@@ -414,7 +268,7 @@ var _ QueryParamValidator = &QueryParamValidatorMock{}
 //	}
 type QueryParamValidatorMock struct {
 	// ValidateFunc mocks the Validate method.
-	ValidateFunc func(ctx context.Context, name string, value string) (interface{}, error)
+	ValidateFunc func(ctx context.Context, name string, value string) (any, error)
 
 	// calls tracks calls to the methods.
 	calls struct {
@@ -432,7 +286,7 @@ type QueryParamValidatorMock struct {
 }
 
 // Validate calls ValidateFunc.
-func (mock *QueryParamValidatorMock) Validate(ctx context.Context, name string, value string) (interface{}, error) {
+func (mock *QueryParamValidatorMock) Validate(ctx context.Context, name string, value string) (any, error) {
 	if mock.ValidateFunc == nil {
 		panic("QueryParamValidatorMock.ValidateFunc: method is nil but QueryParamValidator.Validate was just called")
 	}
@@ -490,7 +344,7 @@ var _ QueryBuilder = &QueryBuilderMock{}
 //			BuildCountQueryFunc: func(ctx context.Context, req *query.CountRequest) ([]byte, error) {
 //				panic("mock out the BuildCountQuery method")
 //			},
-//			BuildSearchQueryFunc: func(ctx context.Context, req *query.SearchRequest, esVersion710 bool) ([]byte, error) {
+//			BuildSearchQueryFunc: func(ctx context.Context, req *query.SearchRequest) ([]byte, error) {
 //				panic("mock out the BuildSearchQuery method")
 //			},
 //		}
@@ -510,7 +364,7 @@ type QueryBuilderMock struct {
 	BuildCountQueryFunc func(ctx context.Context, req *query.CountRequest) ([]byte, error)
 
 	// BuildSearchQueryFunc mocks the BuildSearchQuery method.
-	BuildSearchQueryFunc func(ctx context.Context, req *query.SearchRequest, esVersion710 bool) ([]byte, error)
+	BuildSearchQueryFunc func(ctx context.Context, req *query.SearchRequest) ([]byte, error)
 
 	// calls tracks calls to the methods.
 	calls struct {
@@ -545,8 +399,6 @@ type QueryBuilderMock struct {
 			Ctx context.Context
 			// Req is the req argument value.
 			Req *query.SearchRequest
-			// EsVersion710 is the esVersion710 argument value.
-			EsVersion710 bool
 		}
 	}
 	lockAddNlpCategorySearch    sync.RWMutex
@@ -672,23 +524,21 @@ func (mock *QueryBuilderMock) BuildCountQueryCalls() []struct {
 }
 
 // BuildSearchQuery calls BuildSearchQueryFunc.
-func (mock *QueryBuilderMock) BuildSearchQuery(ctx context.Context, req *query.SearchRequest, esVersion710 bool) ([]byte, error) {
+func (mock *QueryBuilderMock) BuildSearchQuery(ctx context.Context, req *query.SearchRequest) ([]byte, error) {
 	if mock.BuildSearchQueryFunc == nil {
 		panic("QueryBuilderMock.BuildSearchQueryFunc: method is nil but QueryBuilder.BuildSearchQuery was just called")
 	}
 	callInfo := struct {
-		Ctx          context.Context
-		Req          *query.SearchRequest
-		EsVersion710 bool
+		Ctx context.Context
+		Req *query.SearchRequest
 	}{
-		Ctx:          ctx,
-		Req:          req,
-		EsVersion710: esVersion710,
+		Ctx: ctx,
+		Req: req,
 	}
 	mock.lockBuildSearchQuery.Lock()
 	mock.calls.BuildSearchQuery = append(mock.calls.BuildSearchQuery, callInfo)
 	mock.lockBuildSearchQuery.Unlock()
-	return mock.BuildSearchQueryFunc(ctx, req, esVersion710)
+	return mock.BuildSearchQueryFunc(ctx, req)
 }
 
 // BuildSearchQueryCalls gets all the calls that were made to BuildSearchQuery.
@@ -696,14 +546,12 @@ func (mock *QueryBuilderMock) BuildSearchQuery(ctx context.Context, req *query.S
 //
 //	len(mockedQueryBuilder.BuildSearchQueryCalls())
 func (mock *QueryBuilderMock) BuildSearchQueryCalls() []struct {
-	Ctx          context.Context
-	Req          *query.SearchRequest
-	EsVersion710 bool
+	Ctx context.Context
+	Req *query.SearchRequest
 } {
 	var calls []struct {
-		Ctx          context.Context
-		Req          *query.SearchRequest
-		EsVersion710 bool
+		Ctx context.Context
+		Req *query.SearchRequest
 	}
 	mock.lockBuildSearchQuery.RLock()
 	calls = mock.calls.BuildSearchQuery
