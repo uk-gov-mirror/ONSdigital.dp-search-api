@@ -10,10 +10,10 @@ import (
 	componentTest "github.com/ONSdigital/dp-component-test"
 	"github.com/ONSdigital/dp-healthcheck/healthcheck"
 	dphttp "github.com/ONSdigital/dp-net/v3/http"
-	"github.com/ONSdigital/dp-search-api/api"
-	"github.com/ONSdigital/dp-search-api/config"
-	"github.com/ONSdigital/dp-search-api/service"
-	mocks "github.com/ONSdigital/dp-search-api/service/mock"
+	"github.com/ONSdigital/dp-search-api/v2/api"
+	"github.com/ONSdigital/dp-search-api/v2/config"
+	"github.com/ONSdigital/dp-search-api/v2/service"
+	mocks "github.com/ONSdigital/dp-search-api/v2/service/mock"
 )
 
 const (

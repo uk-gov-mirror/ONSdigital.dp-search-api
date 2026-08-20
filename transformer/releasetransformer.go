@@ -7,8 +7,8 @@ import (
 
 	"github.com/pkg/errors"
 
-	"github.com/ONSdigital/dp-search-api/api"
-	"github.com/ONSdigital/dp-search-api/query"
+	"github.com/ONSdigital/dp-search-api/v2/api"
+	"github.com/ONSdigital/dp-search-api/v2/query"
 )
 
 type ReleaseTransformer struct {

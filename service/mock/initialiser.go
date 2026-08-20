@@ -5,9 +5,9 @@ package mocks
 
 import (
 	"github.com/ONSdigital/dp-api-clients-go/v2/health"
-	api "github.com/ONSdigital/dp-search-api/api"
-	"github.com/ONSdigital/dp-search-api/config"
-	"github.com/ONSdigital/dp-search-api/service"
+	api "github.com/ONSdigital/dp-search-api/v2/api"
+	"github.com/ONSdigital/dp-search-api/v2/config"
+	"github.com/ONSdigital/dp-search-api/v2/service"
 	"net/http"
 	"sync"
 )

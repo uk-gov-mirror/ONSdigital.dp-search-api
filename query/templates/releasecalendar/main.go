@@ -10,8 +10,8 @@ import (
 	dpEs "github.com/ONSdigital/dp-elasticsearch/v4"
 	dpEsClient "github.com/ONSdigital/dp-elasticsearch/v4/client"
 	dphttp "github.com/ONSdigital/dp-net/v3/http"
-	"github.com/ONSdigital/dp-search-api/query"
-	"github.com/ONSdigital/dp-search-api/transformer"
+	"github.com/ONSdigital/dp-search-api/v2/query"
+	"github.com/ONSdigital/dp-search-api/v2/transformer"
 )
 
 func main() {

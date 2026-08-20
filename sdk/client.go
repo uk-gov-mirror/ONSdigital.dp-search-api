@@ -11,10 +11,10 @@ import (
 
 	healthcheck "github.com/ONSdigital/dp-api-clients-go/v2/health"
 	health "github.com/ONSdigital/dp-healthcheck/healthcheck"
-	"github.com/ONSdigital/dp-search-api/api"
-	"github.com/ONSdigital/dp-search-api/models"
-	apiError "github.com/ONSdigital/dp-search-api/sdk/errors"
-	"github.com/ONSdigital/dp-search-api/transformer"
+	"github.com/ONSdigital/dp-search-api/v2/api"
+	"github.com/ONSdigital/dp-search-api/v2/models"
+	apiError "github.com/ONSdigital/dp-search-api/v2/sdk/errors"
+	"github.com/ONSdigital/dp-search-api/v2/transformer"
 )
 
 const (

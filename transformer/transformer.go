@@ -6,8 +6,8 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/ONSdigital/dp-search-api/api"
-	"github.com/ONSdigital/dp-search-api/models"
+	"github.com/ONSdigital/dp-search-api/v2/api"
+	"github.com/ONSdigital/dp-search-api/v2/models"
 	"github.com/pkg/errors"
 )
 

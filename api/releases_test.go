@@ -8,7 +8,7 @@ import (
 	"testing"
 
 	"github.com/ONSdigital/dp-elasticsearch/v4/client"
-	"github.com/ONSdigital/dp-search-api/query"
+	"github.com/ONSdigital/dp-search-api/v2/query"
 	"github.com/smartystreets/goconvey/convey"
 )
 
