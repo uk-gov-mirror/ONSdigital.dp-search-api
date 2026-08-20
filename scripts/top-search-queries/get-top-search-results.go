@@ -11,8 +11,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/ONSdigital/dp-search-api/models"
-	"github.com/ONSdigital/dp-search-api/sdk"
+	"github.com/ONSdigital/dp-search-api/v2/models"
+	"github.com/ONSdigital/dp-search-api/v2/sdk"
 	"github.com/ONSdigital/log.go/v2/log"
 )
 

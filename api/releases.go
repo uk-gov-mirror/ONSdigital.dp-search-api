@@ -6,7 +6,7 @@ import (
 	"net/http"
 	"time"
 
-	"github.com/ONSdigital/dp-search-api/query"
+	"github.com/ONSdigital/dp-search-api/v2/query"
 	"github.com/ONSdigital/log.go/v2/log"
 )
 

@@ -6,7 +6,7 @@ package mocks
 import (
 	"context"
 	"github.com/ONSdigital/dp-healthcheck/healthcheck"
-	"github.com/ONSdigital/dp-search-api/service"
+	"github.com/ONSdigital/dp-search-api/v2/service"
 	"net/http"
 	"sync"
 )

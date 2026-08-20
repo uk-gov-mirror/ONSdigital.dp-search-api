@@ -6,10 +6,10 @@ import (
 	"os"
 	"testing"
 
-	"github.com/ONSdigital/dp-search-api/models"
+	"github.com/ONSdigital/dp-search-api/v2/models"
 	c "github.com/smartystreets/goconvey/convey"
 
-	"github.com/ONSdigital/dp-search-api/query"
+	"github.com/ONSdigital/dp-search-api/v2/query"
 )
 
 func TestTransformSearchReleaseResponse(t *testing.T) {

@@ -7,7 +7,7 @@ import (
 	"context"
 	dpEsClient "github.com/ONSdigital/dp-elasticsearch/v4/client"
 	"github.com/ONSdigital/dp-healthcheck/healthcheck"
-	"github.com/ONSdigital/dp-search-api/clients"
+	"github.com/ONSdigital/dp-search-api/v2/clients"
 	"sync"
 )
 

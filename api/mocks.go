@@ -8,7 +8,7 @@ import (
 	"github.com/ONSdigital/dp-authorisation/auth"
 	"github.com/ONSdigital/dp-elasticsearch/v4/client"
 	health "github.com/ONSdigital/dp-healthcheck/healthcheck"
-	"github.com/ONSdigital/dp-search-api/query"
+	"github.com/ONSdigital/dp-search-api/v2/query"
 	"net/http"
 	"sync"
 )

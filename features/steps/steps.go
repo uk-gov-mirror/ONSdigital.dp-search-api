@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/ONSdigital/dp-search-api/models"
+	"github.com/ONSdigital/dp-search-api/v2/models"
 	"github.com/cucumber/godog"
 	"github.com/google/go-cmp/cmp"
 )

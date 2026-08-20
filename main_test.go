@@ -8,7 +8,7 @@ import (
 	"testing"
 
 	componentTest "github.com/ONSdigital/dp-component-test"
-	"github.com/ONSdigital/dp-search-api/features/steps"
+	"github.com/ONSdigital/dp-search-api/v2/features/steps"
 
 	"github.com/cucumber/godog"
 	"github.com/cucumber/godog/colors"

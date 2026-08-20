@@ -11,8 +11,8 @@ import (
 	"github.com/ONSdigital/dp-authorisation/auth"
 	"github.com/ONSdigital/dp-elasticsearch/v4/client"
 	health "github.com/ONSdigital/dp-healthcheck/healthcheck"
-	"github.com/ONSdigital/dp-search-api/config"
-	"github.com/ONSdigital/dp-search-api/query"
+	"github.com/ONSdigital/dp-search-api/v2/config"
+	"github.com/ONSdigital/dp-search-api/v2/query"
 	scrubber "github.com/ONSdigital/dp-search-scrubber-api/sdk"
 	"github.com/gorilla/mux"
 )

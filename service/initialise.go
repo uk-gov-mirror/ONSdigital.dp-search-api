@@ -7,8 +7,8 @@ import (
 	"github.com/ONSdigital/dp-authorisation/auth"
 	"github.com/ONSdigital/dp-healthcheck/healthcheck"
 	dphttp "github.com/ONSdigital/dp-net/v3/http"
-	api "github.com/ONSdigital/dp-search-api/api"
-	"github.com/ONSdigital/dp-search-api/config"
+	api "github.com/ONSdigital/dp-search-api/v2/api"
+	"github.com/ONSdigital/dp-search-api/v2/config"
 )
 
 // ExternalServiceList holds the initialiser and initialisation state of external services.

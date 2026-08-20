@@ -7,8 +7,8 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/ONSdigital/dp-search-api/config"
-	"github.com/ONSdigital/dp-search-api/service"
+	"github.com/ONSdigital/dp-search-api/v2/config"
+	"github.com/ONSdigital/dp-search-api/v2/service"
 	"github.com/ONSdigital/log.go/v2/log"
 	"github.com/pkg/errors"
 

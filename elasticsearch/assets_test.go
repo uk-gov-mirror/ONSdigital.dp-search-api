@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"testing"
 
-	"github.com/ONSdigital/dp-search-api/elasticsearch"
+	"github.com/ONSdigital/dp-search-api/v2/elasticsearch"
 	c "github.com/smartystreets/goconvey/convey"
 )
 
